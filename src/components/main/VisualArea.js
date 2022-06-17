@@ -96,6 +96,10 @@ const ArticleWrap = styled.article`
   flex-direction:row;
   align-items:center;
   justify-content:center;
+  @media screen and (max-width: 556px) {
+    flex-direction:column;
+    padding:60px 0;
+  }
 `;
 const TextWrap = styled.div`
   width:35%;
