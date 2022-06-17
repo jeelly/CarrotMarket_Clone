@@ -8,7 +8,9 @@ function App() {
   return (
       <Container>
         <Header />
-        <Router />
+        <Routerwrap>
+          <Router />
+        </Routerwrap>
         <Footer />
         <GlobalStyles />
       </Container>
@@ -17,4 +19,8 @@ function App() {
 
 export default App;
 
-const Container = styled.div``;
+const Container = styled.div`
+`;
+const Routerwrap = styled.div`
+  padding-top:50px;
+`
