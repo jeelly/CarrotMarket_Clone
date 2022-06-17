@@ -1,13 +1,19 @@
 import React from 'react';
+//styled
+import styled from "styled-components";
 //Subpage
-import Header from '../components/Header'
+import VisualArea from '../components/main/VisualArea'
+import ContentArea from '../components/main/ContentArea';
+
 const Main = () => {
     return (
-      <>
-        <Header />
-        메인페이지입니다.
-      </>
+      <Container>
+        <VisualArea></VisualArea>
+        <ContentArea></ContentArea>
+      </Container>
     );
 };
 
 export default Main;
+
+const Container = styled.div``;
