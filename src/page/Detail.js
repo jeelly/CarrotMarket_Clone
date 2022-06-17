@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+//Router
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Detail = () => {
+  const { id } = useParams();
+
     return (
         <Container>
             <ImgWrap>사진영역</ImgWrap>
@@ -41,7 +45,7 @@ const Container = styled.div`
     flex-direction:column;
     align-items:flex-start;
     justify-content:center;
-    margin:0 auto;
+    margin:80px auto;
 `
 const ImgWrap = styled.div`
     width:100%;

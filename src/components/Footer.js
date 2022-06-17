@@ -10,7 +10,7 @@ const Footer = () => {
             <FooterTop>
                 <Title>당근마켓 <br/>클론코딩</Title>
                 <FooterTopText>
-                    <p>항해99 <br/> 7기</p>
+                    <p style={marginLeft}>항해99 <br/> 7기</p>
                     <p style={marginLeft}>FE 김영호, 지송이 <br/> BE 김건, 심규홍, 백현명</p>
                 </FooterTopText>
             </FooterTop>
@@ -50,7 +50,6 @@ const Container = styled.div`
 `;
 const Title = styled.h3`
     color: #FF7236;
-    margin-right:1vw;
 `
 const FooterTop = styled.section`
     width:100%;
