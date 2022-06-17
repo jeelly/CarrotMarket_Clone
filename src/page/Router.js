@@ -6,7 +6,7 @@ import Main from'./Main'
 import Login from'./Login'
 import SignUp from'./SignUp'
 import Detail from'./Detail'
-import ListItem from'./ListItem'
+import Content from'./Content'
 import Post from'./Post'
 
 const Router = () => {
@@ -16,7 +16,7 @@ const Router = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signUp" element={<SignUp />} />
       <Route path="/detail" element={<Detail />} />
-      <Route path="/listItem" element={<ListItem />} />
+      <Route path="/content" element={<Content />} />
       <Route path="/post" element={<Post />} />
     </Routes>
   );
