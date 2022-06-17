@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import Router from './page/Router';
 import GlobalStyles from './css/GlobalStyles'
 import Header from './components/Header';
+import Footer from './components/Footer';
 function App() {
   return (
       <Container>
         <Header />
         <Router />
+        <Footer />
         <GlobalStyles />
       </Container>
   );

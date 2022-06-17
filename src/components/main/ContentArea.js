@@ -1,6 +1,8 @@
 import React from "react";
 //styled
 import styled from "styled-components";
+//router
+import { Link } from 'react-router-dom';
 
 const ContentArea = () => {
   return (
@@ -45,6 +47,7 @@ const ContentArea = () => {
               </ItemText>
             </Item>
           </Grid>
+          <MoreLink to="Content">인기매물 더 보기</MoreLink>
       </ArticleWrap>
       <ArticleWrap color="#e6e6e6">
         <SubTitle>중고거래 지역매물</SubTitle>
@@ -85,8 +88,8 @@ const ContentArea = () => {
                 <ItemOption>관심 60 ·<span> 채팅 0</span></ItemOption>
               </ItemText>
             </Item>
-            
         </Grid>
+        <MoreLink to="Content">지역매물 더 보기</MoreLink>
       </ArticleWrap>
     </Container>
   );
@@ -105,7 +108,7 @@ const Grid = styled.div`
   width:60%;
   grid-template-columns:repeat(4, 1fr);
   grid-gap :1rem;
-  margin:70px auto;
+  margin:60px auto 20px auto;
   grid-auto-rows:minmax(360px, auto);
 `;
 
@@ -129,4 +132,10 @@ const ItemText = styled.div`
   flex-direction:column;
   align-items:flex-start;
   margin-left: 10px;
+`
+
+const MoreLink = styled(Link)`
+  display:block;
+  text-decoration:underline;
+  margin-bottom:70px;
 `
