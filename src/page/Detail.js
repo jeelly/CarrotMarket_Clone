@@ -5,7 +5,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Detail = () => {
   const { id } = useParams();
-
+  console.log(id)
+    
     return (
         <Container>
             <ImgWrap>사진영역</ImgWrap>

@@ -6,14 +6,14 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 function App() {
   return (
-      <Container>
-        <Header />
-        <Routerwrap>
-          <Router />
-        </Routerwrap>
-        <Footer />
-        <GlobalStyles />
-      </Container>
+    <Container>
+      <Header />
+      <Routerwrap>
+        <Router />
+      </Routerwrap>
+      <Footer />
+      <GlobalStyles />
+    </Container>
   );
 }
 

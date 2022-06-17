@@ -4,16 +4,10 @@ import styled from "styled-components";
 //router
 import { useNavigate, Link } from "react-router-dom";
 //redux
-import { useSelector, useDispatch } from "react-redux";
-import { loadContentDB } from "../redux/modules/contentSlice";
+import { useSelector } from "react-redux";
 const ContentList = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loadContentDB());
-  }, []);
   const content = useSelector((state) => state.content.list);
   console.log(content)
-//   console.log(content[1]?.imageUrl[1].imageUrl)
   return (
       <ArticleWrap>
         <Grid>
@@ -49,6 +43,15 @@ const Grid = styled.div`
   grid-gap: 1rem;
   margin: 60px auto 20px auto;
   grid-auto-rows: minmax(360px, auto);
+  @media screen and (max-width: 1300px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media screen and (max-width: 980px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: 670px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const Item = styled(Link)``;

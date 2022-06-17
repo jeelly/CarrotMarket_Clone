@@ -49,6 +49,10 @@ const Search = styled.input`
     border:none;
     border-radius:5px;
     background-color:#F2F3F6;
+    @media screen and (max-width: 556px) {
+        width:140px;
+        font-size:12px;
+  }
 `
 const HeaderLink = styled(Link)`
     display:inline-block;
@@ -58,4 +62,3 @@ const HeaderLink = styled(Link)`
     line-height:36px;
     padding:0 10px;
 `
-
