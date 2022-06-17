@@ -9,15 +9,15 @@ const Footer = () => {
         <Container>
             <FooterTop>
                 <Title>당근마켓 <br/>클론코딩</Title>
-                <div>
-                    <p style={textLeft}>항해99 7기</p>
-                    <p style={textLeft}>김영호, 지송이 김건, 심규홍, 백현명</p>
-                </div>
+                <FooterTopText>
+                    <p>항해99 <br/> 7기</p>
+                    <p style={marginLeft}>FE 김영호, 지송이 <br/> BE 김건, 심규홍, 백현명</p>
+                </FooterTopText>
             </FooterTop>
             <FooterBr/>
             <FooterBottom>
-                <p style={textLeft}>Front-end <a style={astyle} href="https://github.com/jeelly/CarrotMarket_Clone">https://github.com/jeelly/CarrotMarket_Clone</a></p>
-                <p style={textLeft}>back-end <a style={astyle} href="https://github.com/whitewise95/clone_coding_project_9_teams">https://github.com/whitewise95/clone_coding_project_9_teams</a></p>
+                <p style={textLeft}>Front-end <a style={astyle} href="https://github.com/jeelly/CarrotMarket_Clone" target="_blank">https://github.com/jeelly/CarrotMarket_Clone</a></p>
+                <p style={textLeft}>back-end <a style={astyle} href="https://github.com/whitewise95/clone_coding_project_9_teams" target="_blank">https://github.com/whitewise95/clone_coding_project_9_teams</a></p>
             </FooterBottom>
         </Container>
     );
@@ -29,6 +29,13 @@ const astyle = {
     color:"rgba(232, 232, 232, 0.5)"
 }
 const textLeft = {
+    textAlign:"left"
+}
+const textCenter = {
+    textAlign:"Center"
+}
+const marginLeft = {
+    marginLeft:"20px",
     textAlign:"left"
 }
 const Container = styled.div`
@@ -50,6 +57,9 @@ const FooterTop = styled.section`
     display:flex;
     align-items: center;
 `
+const FooterTopText = styled.div`
+    display:flex;
+`
 const FooterBottom = styled.section`
     width:100%;
 `
@@ -58,12 +68,4 @@ width:100%;
 height:1px;
 margin:12px 0;
 background-color:rgba(232, 232, 232, 0.5);
-`
-const FooterLink = styled(Link)`
-    display:inline-block;
-    margin-left:6px;
-    border:1px solid #d1d1cf;
-    height:36px;
-    line-height:36px;
-    padding:0 10px;
 `

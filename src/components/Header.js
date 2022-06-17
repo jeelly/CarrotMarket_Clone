@@ -26,6 +26,9 @@ const Container = styled.div`
     justify-content:space-between;
     align-items:center;
     padding:0 1vw;
+    position:fixed;
+    z-index:100;
+    background-color:#fff;
 `;
 //Left
 const Title = styled.h1`
