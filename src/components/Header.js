@@ -1,4 +1,5 @@
 import React from 'react';
+//router
 import { Link } from 'react-router-dom';
 //styled
 import styled from "styled-components";
@@ -6,7 +7,7 @@ import styled from "styled-components";
 const Header = () => {
     return (
         <Container>
-            <Title>당근마켓 로고</Title>
+            <Link to="/"><Title>당근마켓 로고</Title></Link>
             <RightWrap>
             <Search type="text" placeholder='물품이나 동네를 검색해보세요.'/>
             <HeaderLink to="/login">로그인</HeaderLink>
