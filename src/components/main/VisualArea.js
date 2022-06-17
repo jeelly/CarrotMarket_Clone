@@ -108,7 +108,7 @@ overflow:hidden;
 `
 const Img = styled.img`
   object-fit:contain;
-  width: 548px;
+  width: 100%;
 `;
 const SubTitle = styled.h2`
   font-size: 38px;
