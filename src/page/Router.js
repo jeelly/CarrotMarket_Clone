@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 //router
 import { Routes, Route } from 'react-router-dom';
 //Sub
@@ -9,12 +9,21 @@ import Detail from'./Detail'
 import Content from'./Content'
 import Post from'./Post'
 import PageNotFound from'./PageNotFound'
+//Redux
+import { useDispatch } from "react-redux";
+import { loadContentDB } from "../redux/modules/contentSlice";
 
 const Router = () => {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadContentDB());
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login"  element={<Login />} />
       <Route path="/signUp" element={<SignUp />} />
       <Route path="/detail" element={<Detail />} />
       <Route path="/detail/:id" element={<Detail />} />

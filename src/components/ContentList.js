@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
 //stylyed
 import styled from "styled-components";
 //router
 import { useNavigate, Link } from "react-router-dom";
 //redux
 import { useSelector } from "react-redux";
-const ContentList = () => {
+
+const ContentList = (props) => {
   const content = useSelector((state) => state.content.list);
   console.log(content)
+  console.log(props)
   return (
       <ArticleWrap>
         <Grid>
@@ -26,6 +27,9 @@ const ContentList = () => {
                 </ItemText>
               </Item>
             ))}
+            {/* {content && content.map((l, idx) => (
+              <Detail key={idx} l={l} />
+            ))} */}
         </Grid>
       </ArticleWrap>
   );

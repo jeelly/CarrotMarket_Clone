@@ -20,12 +20,12 @@ const Header = () => {
 export default Header;
 
 const Container = styled.div`
-    width:100%;
     height:50px;
     display:flex;
+    width:100%;
     justify-content:space-between;
     align-items:center;
-    padding:0 1vw;
+    padding:0 20vw;
     position:fixed;
     z-index:100;
     background-color:#fff;
