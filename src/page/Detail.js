@@ -5,6 +5,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 //redux
 import { removeContentDB } from '../redux/modules/contentSlice';
 import { useSelector, useDispatch } from 'react-redux';
+//slick
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Detail = () => {
     const dispatch = useDispatch();
@@ -18,11 +22,25 @@ const Detail = () => {
     await navigate(-1)
   };
 
+  //사진 슬라이드
+  const settings = {
+    arrows:true,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
     return (
         <Container>
-            <ImgWrap>{content[id]?.imageUrl.map((l, idx) => (
-                      <img key={idx} src={l.imageUrl} alt={l.title} />
-                    ))}</ImgWrap>
+                <ImgWrap>
+                    <SliderWrap {...settings}>
+                        {content[id]?.imageUrl.map((l, idx) => (
+                            <Img key={idx} src={l.imageUrl} alt={l.title} />
+                        ))}
+                    </SliderWrap>                    
+                </ImgWrap>
             <UserWrap>
                 <UserImage>프로필사진</UserImage>
                 <UserInfo>
@@ -38,7 +56,7 @@ const Detail = () => {
                 <ContentPrice>{content[id]?.price}원</ContentPrice>
                 <ContentText>{content[id]?.content}
                 </ContentText>
-                <ContentInfo>관심{content[id]?.likeCount} · 채팅0 · 조회0</ContentInfo>
+                <ContentInfo>🤍{content[id]?.likeCount} · 채팅0 · 조회0</ContentInfo>
                 <BrLine/>
             </ContentWrap>
             
@@ -55,7 +73,7 @@ const BrLine = styled.div`
     background-color:#878686;
 `
 const Container = styled.div`
-    width:50%;
+    width:40%;
     display:flex;
     flex-direction:column;
     align-items:flex-start;
@@ -64,13 +82,16 @@ const Container = styled.div`
 `
 const ImgWrap = styled.div`
     width:100%;
-    height:500px;
-    border:1px solid black;
-    border-radius:16px;
+    margin:0 auto;
     margin-bottom:30px;
-    overflow:hidden;
-    background-color:black;
+    /* overflow:hidden; */
 `
+const Img = styled.img`
+    height:500px;
+    width:500px;
+    /* border-radius:16px; */
+`
+const SliderWrap = styled(Slider)``
 const UserWrap = styled.div`
     display:flex;
     align-items:center;
@@ -122,4 +143,5 @@ const DelBtn = styled.button`
     border:none;
     padding:5px 20px;
     float:right;
+    cursor:pointer;
 `
