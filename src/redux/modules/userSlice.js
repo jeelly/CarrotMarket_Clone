@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { setCookie } from "../../shared/cookie";
 
 //미들웨어
 //login
@@ -10,8 +11,11 @@ export const loginUserDB = ({ users }) => {
       .post("", users)
       .then((response) => {
         const accessToken = response.data.token;
+       
         //서버에서 받은 토큰 저장
-        localStorage.setItem("token", `${accessToken}`);
+        setCookie("is_login", `${accessToken}`);
+        const nickname = response.data.nickname;
+
         // 저장된 토큰으로 login 여부 확인
         if (accessToken) {
           dispatch(loginUser(true));
@@ -28,7 +32,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     isLogin: false,
-    list: [],
+    // list: [],
   },
 
   reducers: {
