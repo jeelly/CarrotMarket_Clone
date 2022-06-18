@@ -4,16 +4,8 @@ import styled from "styled-components";
 //Subpage
 import VisualArea from '../components/main/VisualArea'
 import ContentArea from '../components/main/ContentArea';
-import { loadContentDB } from '../redux/modules/contentSlice';
-//redux
-import { useSelector, useDispatch } from "react-redux";
 
 const Main = () => {
-  const dispatch = useDispatch();
-    useEffect(() => {
-      dispatch(loadContentDB());
-    }, []);
-
     return (
       <Container>
         <VisualArea></VisualArea>

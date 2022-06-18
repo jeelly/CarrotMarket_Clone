@@ -9,11 +9,11 @@ import ContentList from '../ContentList'
 const ContentArea = () => {
   return (
     <Container color="#e6e6e6">
-      <SubTitle>중고거래 지역매물</SubTitle>
-      <ContentList />
+      <SubTitle>중고거래 인기매물</SubTitle>
+      <ContentList category='서울' />
       <MoreLink to="content">인기매물 더 보기</MoreLink>
       <SubTitle>중고거래 지역매물</SubTitle>
-      <ContentList />
+      <ContentList category='서울' />
       <MoreLink to="content">지역매물 더 보기</MoreLink>
     </Container>
   );

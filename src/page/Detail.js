@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 //Router
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
-const Detail = () => {
+const Detail = ({l}) => {
   const { id } = useParams();
-  console.log(id)
-    
+  const content = useSelector((state) => state.content.list);
+
+  console.log(l)
     return (
         <Container>
             <ImgWrap>사진영역</ImgWrap>
@@ -19,13 +21,12 @@ const Detail = () => {
             </UserWrap>
             <BrLine/>
             <ContentWrap>
-                <ContentTitle>야외 테이블 (드림)</ContentTitle>
-                <ContentOption>기타 중고물품 · <span> 2022-06-18</span></ContentOption>
-                <ContentPrice>1,000원</ContentPrice>
-                <ContentText>빌라 1층 테라스에서 쓰던 야외용 테이블 입니다.<br/>
-                    사진에서 보다시피 파라솔은 없지만 별도 구매후 장착은 가능합니다.
+                <ContentTitle>{content[id]?.title}</ContentTitle>
+                <ContentOption>{content[id]?.category} · <span> 2022-06-18</span></ContentOption>
+                <ContentPrice>{content[id]?.price}원</ContentPrice>
+                <ContentText>{content[id]?.content}
                 </ContentText>
-                <ContentInfo>관심5 · 채팅28 · 조회339</ContentInfo>
+                <ContentInfo>관심{content[id]?.likeCount} · 채팅0 · 조회0</ContentInfo>
                 <BrLine/>
             </ContentWrap>
         </Container>
