@@ -1,17 +1,45 @@
 import React from 'react';
 //router
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 //styled
 import styled from "styled-components";
+import { userActions } from '../redux/modules/userSlice';
 
 const Header = () => {
+    const deleteToken = () => {
+        // 로그아웃 시 토큰 삭제
+        localStorage.removeItem("Token")
+
+        // 로그아웃 시 isLogin --> false 변경
+        // setIsLogin(false); --> 쿠키 때만 쓰기
+
+        // 로그아웃 시 페이지 새로고침
+        window.location.reload();
+    };
+
+    // 로그인 상태 --> 로컬스토리지의 토큰 유무로 확인 (null or 토큰값)
+    const is_login = localStorage.getItem("Token")
+
+    // 컴포넌트 렌더링 시 로그인 여부 체크 
+    // useEffect(() => {
+    //     if (user.isLogin) {
+    //         setIsLogin(true);
+    //     } else {
+    //         setIsLogin(false)
+    //     }
+    // },[user]);
+
     return (
         <Container>
             <Link to="/"><Title>당근마켓 로고</Title></Link>
             <RightWrap>
             <Search type="text" placeholder='물품이나 동네를 검색해보세요.'/>
-            <HeaderLink to="/login">로그인</HeaderLink>
-            <HeaderLink to="/SignUp">회원가입</HeaderLink>
+            {!is_login && <HeaderLink to="/login">로그인</HeaderLink>}
+            {!is_login && <HeaderLink to="/SignUp">회원가입</HeaderLink>}
+
+            {is_login && <HeaderLink onClick={deleteToken}>로그아웃</HeaderLink>}
             </RightWrap>
         </Container>
     );

@@ -61,7 +61,7 @@ const SignUp = () => {
       return;
     }
     if (!nicknameCheck(name_ref.current.value)) {
-      window.alert("닉네임은 3 ~ 8자 한글,영문,숫자!");
+      window.alert("닉네임은 3 ~ 8자 한글,영문,숫자 조합으로 작성하세요!");
       return;
     }
 
@@ -80,20 +80,22 @@ const SignUp = () => {
       <h1>회원가입</h1>
       <div>
         <IdBox>
-          <p>아이디(이메일)</p>
+          <p>아이디</p>
           <br />
           <input type="text" ref={id_ref} />
-          <p>설명</p>
+          <p>이메일 형식으로 적어주세요.</p>
         </IdBox>
         <NicknameBox>
           <p>닉네임</p>
           <br />
           <input type="text" ref={name_ref} />
+          <p>3 ~ 8자 한글,영문,숫자 조합으로 적어주세요.</p>
         </NicknameBox>
         <PwdBox>
           <p>비밀번호</p>
           <br />
           <input type="password" ref={pwd_ref} />
+          <p>3 ~ 10자 영문, 숫자 및 특수문자조합으로 적어주세요.</p>
         </PwdBox>
         <PwdCkBox>
           <p>비밀번호 확인</p>
@@ -104,15 +106,15 @@ const SignUp = () => {
           <p>지역 선택</p>
           <select name="areaSelect" ref={select_ref}>
             <option value="seoul">서울</option>
-            <option value="gyeonggi-do">경기도</option>
-            <option value="gangwon-do">강원도</option>
-            <option value="chungcheongbug-do">충청북도</option>
-            <option value="chungcheongnam-do">충청남도</option>
-            <option value="gyeongsangbug-do">경상북도</option>
-            <option value="gyeongsangnam-do">경상남도</option>
-            <option value="jeonlabug-do">전라북도</option>
-            <option value="jeonlanam-do">전라남도</option>
-            <option value="jeju-do">제주도</option>
+            <option value="gyeonggi-do">경기</option>
+            <option value="gangwon-do">강원</option>
+            <option value="chungcheongbug-do">충북</option>
+            <option value="chungcheongnam-do">충남</option>
+            <option value="gyeongsangbug-do">경북</option>
+            <option value="gyeongsangnam-do">경남</option>
+            <option value="jeonlabug-do">전북</option>
+            <option value="jeonlanam-do">전남</option>
+            <option value="jeju-do">제주</option>
           </select>
         </RegionBox>
       </div>

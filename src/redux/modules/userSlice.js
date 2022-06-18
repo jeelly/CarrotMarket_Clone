@@ -1,20 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setCookie } from "../../shared/cookie";
 
 //미들웨어
 //login
-export const loginUserDB = ({ users }) => {
+export const loginUserDB = ( users ) => {
   return async function (dispatch) {
     await axios
       //서버에 데이터 값 넣기
       .post("", users)
       .then((response) => {
-        const accessToken = response.data.token;
+        const accessToken = response.data.token; // 토큰 저장안되면 콘솔 찍어서 바꿔주기
        
         //서버에서 받은 토큰 저장
-        setCookie("is_login", `${accessToken}`);
-        const nickname = response.data.nickname;
+        localStorage.setItem("Token", `${accessToken}`);
+        // const nickname = response.data.nickname;
 
         // 저장된 토큰으로 login 여부 확인
         if (accessToken) {

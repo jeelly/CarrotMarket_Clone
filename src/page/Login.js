@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUserDB } from "../redux/modules/userSlice";
 
 const Login = () => {
-  const navigate = useNavigate();
+ 
   const dispatch = useDispatch();
 
   const id_ref = React.useRef(null);
@@ -40,10 +39,9 @@ const Login = () => {
       <h1>로그인</h1>
       <div>
         <IdBox>
-          <p>아이디(이메일)</p>
+          <p>아이디</p>
           <br />
           <input type="text" ref={id_ref} />
-          <p>설명</p>
         </IdBox>
         <PwdBox>
           <p>비밀번호</p>
