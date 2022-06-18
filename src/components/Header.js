@@ -1,13 +1,15 @@
 import React from 'react';
 //router
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+
 //styled
 import styled from "styled-components";
 import { userActions } from '../redux/modules/userSlice';
 
 const Header = () => {
+    const navigate = useNavigate();
     const deleteToken = () => {
         // 로그아웃 시 토큰 삭제
         localStorage.removeItem("Token")
@@ -15,8 +17,8 @@ const Header = () => {
         // 로그아웃 시 isLogin --> false 변경
         // setIsLogin(false); --> 쿠키 때만 쓰기
 
-        // 로그아웃 시 페이지 새로고침
-        window.location.reload();
+        // 로그아웃 시 페이지 리렌더링
+        navigate('/')
     };
 
     // 로그인 상태 --> 로컬스토리지의 토큰 유무로 확인 (null or 토큰값)

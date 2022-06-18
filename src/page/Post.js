@@ -10,7 +10,7 @@ const Post = () => {
   const dispath = useDispatch();
   const navigate = useNavigate();
 
-  const content = useSelector((state) => state.content.list);
+//   const content = useSelector((state) => state.content.list);
 
   const subjectRef = React.useRef(null);
   const priceRef = React.useRef(null);
@@ -20,9 +20,10 @@ const Post = () => {
   const formData = new FormData();
 
   const addContentList = () => {
+    postSubmit();
     dispath(
       addContentDB({
-        // imageUrl: file_link_ref.current.url,
+        imageUrl: imageRef.current.url,
         subject: subjectRef.current.value,
         price: priceRef.current.value,
         content: contentRef.current.value,
@@ -31,26 +32,26 @@ const Post = () => {
   };
 
   //이미지 선택했을 때 input type="file" => onChange 이벤트가 발생했을 때
-  const imageUpload = (e) => {
-    formData.append("image", imageRef.current.files[0])
-  }
+//   const imageUpload = (e) => {
+//     formData.append("image", imageRef.current.files[0])
+//   }
 
-  const PostSubmit = (e) => {
-    e.preventDefault();
+  const postSubmit = () => {
+    formData.append("image", imageRef.current.files[0])
     axios.post("http://주소/",formData).then((response) => {
     //response.data.imageUrl = "http://주소.jpg"
 
-    axios.post("http://주소/api/write", {
-        subject: "제목",
-        content: "내용",
-        imageUrl: response.data.imageUrl
-    }).then((response) => {
-        if (response.data.result){
-            alert("글 작성 완료!")
-        } else {
-            alert("글 작성 실패!")
-        }
-    });
+    // axios.post("http://주소/api/write", {
+    //     subject: "제목",
+    //     content: "내용",
+    //     imageUrl: response.data.imageUrl
+    // }).then((response) => {
+    //     if (response.data.result){
+    //         alert("글 작성 완료!")
+    //     } else {
+    //         alert("글 작성 실패!")
+    //     }
+    // });
     });
   }
   return (
@@ -69,7 +70,7 @@ const Post = () => {
 
       <ImgWrap></ImgWrap>
       <div>
-        <input type="file" onChange={imageUpload} ref={imageRef} />
+        <input type="file" ref={imageRef} />
         <br />
         <p>글 제목</p>
         <input type="text" ref={subjectRef} />
