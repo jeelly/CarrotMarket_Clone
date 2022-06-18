@@ -2,24 +2,17 @@ import React, { useEffect } from 'react';
 //stylyed
 import styled from 'styled-components';
 //router
-import { useNavigate, Link} from 'react-router-dom';
-//redux
-import { useSelector, useDispatch } from 'react-redux';
-import { loadContentDB } from '../redux/modules/contentSlice';
+import { useNavigate, Link, useParams} from 'react-router-dom';
 //sub
 import ContentList from '../components/ContentList';
 const ListItem = () => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(loadContentDB())
-    }, []);
-    const content = useSelector(state => state);
+    const { id } = useParams();
 
     return (
       <Container>
-        <Title>{1==1?"중고 거래 인기매물":"중고 거래 지역매물"}</Title>
+        <Title>{id==="top"?"중고 거래 인기매물":"중고 거래 지역매물"}</Title>
         <SelectWrap>
-            <AreaSelect name="h_area1">
+            {/* <AreaSelect name="h_area1">
             <option>-선택-</option>
             <option value="서울">서울</option>
             <option value="부산">부산</option>
@@ -37,7 +30,7 @@ const ListItem = () => {
             <option value="제주">제주</option>
             <option value="충남">충남</option>
             <option value="충북">충북</option>
-            </AreaSelect>
+            </AreaSelect> */}
         </SelectWrap>
         <ContentList />
       </Container>

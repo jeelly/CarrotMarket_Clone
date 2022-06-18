@@ -1,22 +1,47 @@
+import React, { useEffect } from "react";
 //stylyed
 import styled from "styled-components";
 //router
 import { useNavigate, Link } from "react-router-dom";
 //redux
 import { useSelector } from "react-redux";
-
 const ContentList = (props) => {
   const content = useSelector((state) => state.content.list);
   console.log(content)
   console.log(props)
+
   return (
-      <ArticleWrap>
-        <Grid>
-            {content && content.map((l, idx) => (
+    <ArticleWrap>
+      <Grid>
+        {props.region
+          ? content &&
+            content
+              .filter((l) => props.region === l.region)
+              .map((l, idx) => (
                 <Item to={`/detail/${idx}`} key={idx}>
-                <ItemImg>{l?.imageUrl.map((l, idx) => (
-                    <img key={idx} src={l.imageUrl} alt={l.title}></img>
-                ))}</ItemImg>
+                  <ItemImg>
+                    {l?.imageUrl.map((l, idx) => (
+                      <Img key={idx} src={l.imageUrl} alt={l.title} />
+                    ))}
+                  </ItemImg>
+                  <ItemText>
+                    <ItemTitle>{l.title}</ItemTitle>
+                    <ItemPrice>{l.price}원</ItemPrice>
+                    <ItemArea>{l.category}</ItemArea>
+                    <ItemOption>
+                      관심 60 ·<span> 채팅 0</span>
+                    </ItemOption>
+                  </ItemText>
+                </Item>
+              ))
+          : content &&
+            content.map((l, idx) => (
+              <Item to={`/detail/${idx}`} key={idx}>
+                <ItemImg>
+                  {l?.imageUrl.map((l, idx) => (
+                    <Img key={idx} src={l.imageUrl} alt={l.title}></Img>
+                  ))}
+                </ItemImg>
                 <ItemText>
                   <ItemTitle>{l.title}</ItemTitle>
                   <ItemPrice>{l.price}원</ItemPrice>
@@ -27,11 +52,8 @@ const ContentList = (props) => {
                 </ItemText>
               </Item>
             ))}
-            {/* {content && content.map((l, idx) => (
-              <Detail key={idx} l={l} />
-            ))} */}
-        </Grid>
-      </ArticleWrap>
+      </Grid>
+    </ArticleWrap>
   );
 };
 
@@ -58,15 +80,21 @@ const Grid = styled.div`
   }
 `;
 
-const Item = styled(Link)``;
+const Item = styled(Link)`
+  /* overflow:hidden; */
+`;
 const ItemImg = styled.div`
   margin: 0 auto 20px auto;
   background-color: white;
   border-radius: 20px;
-  height: 200px;
+  height:200px;
+  width:100%;
   vertical-align: middle;
   overflow:hidden;
 `;
+const Img = styled.img`
+  width:100%;
+`
 const ItemTitle = styled.h3`
   font-weight: 400;
 `;

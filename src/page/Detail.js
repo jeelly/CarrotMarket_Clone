@@ -2,16 +2,27 @@ import React from 'react';
 import styled from 'styled-components';
 //Router
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useSelector } from 'react-redux';
+//redux
+import { removeContentDB } from '../redux/modules/contentSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
-const Detail = ({l}) => {
-  const { id } = useParams();
-  const content = useSelector((state) => state.content.list);
+const Detail = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const content = useSelector((state) => state.content.list);
 
-  console.log(l)
+  // 게시글 삭제 redux 함수 호출
+  const onRemoveContent = async () => {
+    await dispatch(removeContentDB(content[id].id));
+    await navigate(-1)
+  };
+
     return (
         <Container>
-            <ImgWrap>사진영역</ImgWrap>
+            <ImgWrap>{content[id]?.imageUrl.map((l, idx) => (
+                      <img key={idx} src={l.imageUrl} alt={l.title} />
+                    ))}</ImgWrap>
             <UserWrap>
                 <UserImage>프로필사진</UserImage>
                 <UserInfo>
@@ -21,6 +32,7 @@ const Detail = ({l}) => {
             </UserWrap>
             <BrLine/>
             <ContentWrap>
+                <DelBtn onClick={onRemoveContent}>삭제</DelBtn>
                 <ContentTitle>{content[id]?.title}</ContentTitle>
                 <ContentOption>{content[id]?.category} · <span> 2022-06-18</span></ContentOption>
                 <ContentPrice>{content[id]?.price}원</ContentPrice>
@@ -29,6 +41,7 @@ const Detail = ({l}) => {
                 <ContentInfo>관심{content[id]?.likeCount} · 채팅0 · 조회0</ContentInfo>
                 <BrLine/>
             </ContentWrap>
+            
         </Container>
     );
 };
@@ -55,6 +68,8 @@ const ImgWrap = styled.div`
     border:1px solid black;
     border-radius:16px;
     margin-bottom:30px;
+    overflow:hidden;
+    background-color:black;
 `
 const UserWrap = styled.div`
     display:flex;
@@ -102,4 +117,9 @@ const ContentInfo = styled.p`
     font-size:14px;
     color:#878686;
     
+`
+const DelBtn = styled.button`
+    border:none;
+    padding:5px 20px;
+    float:right;
 `
