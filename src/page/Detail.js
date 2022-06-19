@@ -56,7 +56,7 @@ const Detail = () => {
                 <ContentPrice>{content[id]?.price}원</ContentPrice>
                 <ContentText>{content[id]?.content}
                 </ContentText>
-                <ContentInfo>🤍{content[id]?.likeCount} · 채팅0 · 조회0</ContentInfo>
+                <ContentInfo style={{backgroundImage: `url("https://cdn.icon-icons.com/icons2/2436/PNG/512/photo_image_icon_147448.png")`}}>🤍{content[id]?.likeCount} · 채팅0 · 조회0</ContentInfo>
                 <BrLine/>
             </ContentWrap>
             

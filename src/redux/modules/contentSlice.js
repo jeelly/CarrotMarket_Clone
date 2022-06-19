@@ -26,8 +26,8 @@ export const removeContentDB = (targetId) => {
 export const addContentDB = (data) => {
   return async function (dispatch) {
     try {
-      const response = await instance.post("/content/", data);
-      // response.data.result;
+      await instance.post("/content/", data);
+      // console.log(response.data, data)
       //서버에서 보내주는 데이터 넣기 
     } catch (error) {
       alert(error);
