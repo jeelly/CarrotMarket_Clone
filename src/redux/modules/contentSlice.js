@@ -4,11 +4,18 @@ import instance from "../../shared/axios";
 
 //미들웨어
 // 게시글 불러오기
-export const loadContentDB = () => {
-  return async function (dispatch) {
-    const response = await instance.get(`/content/`);
-    const newstate = [...response.data];
-    dispatch(loadContent(newstate));
+export const loadContentDB = (page) => {
+  console.log(page)
+  const pagess = page ? page : 1
+  console.log(pagess)
+  return async function (dispatch, getState) {
+    const response = await instance.get(`/post/top/all/region?page=${pagess}`, { params: {pagess} });
+    // const response = await instance.get(`/content`, { params: {page} });
+    console.log(response)
+    const data = getState().content.list
+    const newstate = [...data, ...response.data];
+    const pages = page?page+1:1;
+    dispatch(loadContent({newstate, pages}));
   };
 };
 // 게시글 삭제
@@ -22,6 +29,7 @@ export const removeContentDB = (targetId) => {
     }
   };
 };
+
 // 게시글 추가하기
 export const addContentDB = (data) => {
   return async function (dispatch) {
@@ -44,7 +52,9 @@ const userSlice = createSlice({
   },
   reducers: {
     loadContent: (state, action) => {
-      state.list = [...action.payload];
+      state.list = [...action.payload.newstate];
+      state.pages = action.payload.pages;
+      console.log(state.pages)
     },
     removeContent(state, action) {
       console.log(action.payload);
