@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -6,137 +6,205 @@ import axios from "axios";
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const id_ref = React.useRef(null);
-  const name_ref = React.useRef(null);
-  const pwd_ref = React.useRef(null);
-  const repwd_ref = React.useRef(null);
-  const select_ref = React.useRef(null);
+  //Ref 값 가져오기
+  const usernameRef = React.useRef(null);
+  const nicknameRef = React.useRef(null);
+  const pwdRef = React.useRef(null);
+  const rePwdRef = React.useRef(null);
+  const selectRef = React.useRef(null);
 
-  // 벨리데이션
-  const emailCheck = (email) => {
-    let _reg =
-      /^[0-9a-zA-Z]([-_.0-9a-zA-Z])*@[0-9a-zA-Z]([-_.0-9a-zA-Z])*.([a-zA-Z])*/;
-    //이메일 형식으로!
-    return _reg.test(email);
-  };
+  //아이디, 이메일, 비밀번호, 비밀번호 확인
+  const [username, setUsername] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [rePwd, setRePwd] = useState("");
 
-  const passwordCheck = (password) => {
-    let _reg =
-      /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@$!%*#?&])[0-9a-zA-Z@$!%*#?&]{3,10}$/;
-    //비밀번호는 3 ~ 10자 영문, 숫자 및 특수문자조합으로
-    return _reg.test(password);
-  };
+  // 유효성 검사
+  const [isUsername, setIsUsername] = useState(false);
+  const [isNickname, setIsNickname] = useState(false);
+  const [isPwd, setIsPwd] = useState(false);
+  const [isRePwd, setIsRePwd] = useState(false);
 
-  const nicknameCheck = (nickname) => {
-    let _reg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,8}$/;
-    //닉네임은 3~8자 한글,영어,숫자
-    return _reg.test(nickname);
-  };
+  //오류메시지 상태저장
+  const [usernameMsg, setUsernameMsg] = useState("");
+  const [nicknameMsg, setNicknameMsg] = useState("");
+  const [pwdMsg, setPwdMsg] = useState("");
+  const [rePwdMsg, setRePwdMsg] = useState("");
 
-  const signupAxios = async () => {
+  const onSubmit = async () => {
     let users = {
-      username: id_ref.current.value,
-      nickname: name_ref.current.value,
-      password: pwd_ref.current.value,
-      region: select_ref.current.value,
+      username: username,
+      nickname: nickname,
+      password: pwd,
+      region: selectRef.current.value,
     };
 
-    //벨리데이션
-    if (id_ref.current.value === "" || pwd_ref.current.value === "") {
-      window.alert("이메일 혹은 비밀번호가 공란! 입력해주세요!");
-      return;
-    }
-    if (!emailCheck(id_ref.current.value)) {
-      window.alert("이메일 형식이 맞지 않습니다!");
-      return;
-    }
-    if (pwd_ref.current.value !== repwd_ref.current.value) {
-      window.alert("비밀번호가 동일하지 않습니다!");
-      return;
-    }
-    if (!passwordCheck(pwd_ref.current.value)) {
-      window.alert(
-        "비밀번호는 8 ~ 10자 영문, 숫자 및 특수문자조합으로 작성하세요!"
-      );
-      return;
-    }
-    if (!nicknameCheck(name_ref.current.value)) {
-      window.alert("닉네임은 3 ~ 8자 한글,영문,숫자 조합으로 작성하세요!");
-      return;
-    }
-
     await axios
-      .post("http://whitewise.shop/user/signup", users) // api 넣기 !
+      .post("http://whitewise.shop/user/signup", users)
       .then((response) => {
         window.alert("회원가입 성공!");
         navigate("/login");
       })
       .catch((error) => {
-        window.alert(error.response.data.errormessage); // api 받으면 에러 콘솔 확인해보기 !
+        window.alert(error.response.data.errormessage);
       });
+    }
+    
+    // 아이디
+    const onChangeUsername = useCallback((e) => {
+      const usernameRegex =
+        /([\w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([\w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$/;
+      const usernameCurrent = usernameRef.current.value;
+      setUsername(usernameCurrent);
+  
+      if (!usernameRegex.test(usernameCurrent)) {
+        setUsernameMsg("이메일 형식을 다시 한번 확인해 주세요.");
+        setIsUsername(false);
+      } else {
+        setUsernameMsg("알맞게 작성되었습니다 :)");
+        setIsUsername(true);
+      }
+    }, []);
+
+    // 닉네임
+  const onChangeNickname = useCallback((e) => {
+    const nicknameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,10}$/;
+    //닉네임은 3~8자 한글,영어,숫자
+    const nicknameCurrent = nicknameRef.current.value;
+    setNickname(nicknameCurrent);
+
+    if (!nicknameRegex.test(nicknameCurrent)) {
+      setNicknameMsg("닉네임은 3~8자 한글,영어,숫자");
+      setIsNickname(false);
+    } else {
+      setNicknameMsg("알맞게 작성되었습니다 :)");
+      setIsNickname(true);
+    }
+  }, []);
+
+// 비밀번호
+const onChangePwd = useCallback((e) => {
+  const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@$!%*#?&])[0-9a-zA-Z@$!%*#?&]{3,10}$/;
+  //비밀번호는 3 ~ 10자 영문, 숫자 및 특수문자조합으로
+  const passwordCurrent = pwdRef.current.value;
+  setPwd(passwordCurrent);
+
+  if (!passwordRegex.test(passwordCurrent)) {
+    setPwdMsg("비밀번호는 3 ~ 10자 영문, 숫자 및 특수문자조합으로");
+    setIsPwd(false);
+  } else {
+    setPwdMsg("알맞게 작성되었습니다 :)");
+    setIsPwd(true);
+  }
+}, []);
+
+// 비밀번호 확인
+const onChangeRePwd = useCallback(
+  (e) => {
+    const passwordConfirmCurrent = rePwdRef.current.value;
+    setRePwd(passwordConfirmCurrent);
+
+    if (pwd === passwordConfirmCurrent) {
+      setRePwdMsg("비밀번호를 똑같이 입력했어요 :)");
+      setIsRePwd(true);
+    } else {
+      setRePwdMsg("비밀번호를 다시 한번 확인해 주세요.");
+      setIsRePwd(false);
+    }
+  },
+  [pwd]
+);
+
+  
+
+  // 엔터키 설정
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onSubmit();
+    }
   };
-
-    // 버튼 비활성화
-    const [username, setUsername] = React.useState("");
-    const [nickname, setNickname] = React.useState("");
-    const [pwd, setPwd] = React.useState("");
-    const [repwd, setRePwd] = React.useState("");
-
-    const checkUsername = (e) => {
-      setUsername(e.target.value);
-    };
-    const checkNickname = (e) => {
-      setNickname(e.target.value);
-    };
-    const checkPwd = (e) => {
-      setPwd(e.target.value);
-    };
-    const checkRePwd = (e) => {
-      setRePwd(e.target.value);
-    };
 
   return (
     <Wrap>
       <h1>회원가입</h1>
       <div>
         <IdBox>
-          <p>아이디</p>
+        <label htmlFor="email">아이디</label>
           <br />
-          <input type="text" ref={id_ref} 
-           // 버튼 비활성화
-           onChange={checkUsername}
-           required/>
-          <p>이메일 형식으로 적어주세요.</p>
+          <input
+            type="email"
+            id="email"
+            ref={usernameRef}
+            onChange={onChangeUsername}
+            required
+          />
+          <Pone>
+            {username.length > 0 && (
+              <span className={`message ${isUsername ? "success" : "error"}`}>
+                {usernameMsg}
+              </span>
+            )}
+          </Pone>
         </IdBox>
         <NicknameBox>
-          <p>닉네임</p>
+        <label htmlFor="nickname">닉네임</label>
           <br />
-          <input type="text" ref={name_ref} 
-           // 버튼 비활성화
-           onChange={checkNickname}
-           required/>
-          <p>3 ~ 8자 한글,영문,숫자 조합으로 적어주세요.</p>
+          <input
+            id="nickname"
+            type="nickname"
+            ref={nicknameRef}
+            onChange={onChangeNickname}
+            required
+          />
+             <Pone>
+            {nickname.length > 0 && (
+              <span className={`message ${isNickname ? "success" : "error"}`}>
+                {nicknameMsg}
+              </span>
+            )}
+          </Pone>
         </NicknameBox>
         <PwdBox>
-          <p>비밀번호</p>
+        <label htmlFor="password">비밀번호</label>
           <br />
-          <input type="password" ref={pwd_ref} 
-           // 버튼 비활성화
-           onChange={checkPwd}
-           required/>
-          <p>3 ~ 10자 영문, 숫자 및 특수문자조합으로 적어주세요.</p>
+          <input
+          id="password"
+            type="password"
+            ref={pwdRef}
+            onChange={onChangePwd}
+            required
+          />
+          <Pone>
+            {pwd.length > 0 && (
+              <span className={`message ${isPwd ? "success" : "error"}`}>
+                {pwdMsg}
+              </span>
+            )}
+          </Pone>
         </PwdBox>
         <PwdCkBox>
-          <p>비밀번호 확인</p>
+        <label htmlFor="repwd">비밀번호 확인</label>
           <br />
-          <input type="password" ref={repwd_ref} 
-           // 버튼 비활성화
-           onChange={checkRePwd}
-           required/>
+          <input
+          id="repwd"
+            type="password"
+            ref={rePwdRef}
+            onChange={onChangeRePwd}
+            onKeyPress={onKeyPress}
+            required
+          />
+          <Pone>
+            {rePwd.length > 0 && (
+              <span className={`message ${isRePwd ? "success" : "error"}`}>
+                {rePwdMsg}
+              </span>
+            )}
+          </Pone>
         </PwdCkBox>
         <RegionBox>
-          <p>지역 선택</p>
-          <select name="areaSelect" ref={select_ref}>
+        <label htmlFor="region">지역 선택</label>
+              <br/>
+          <select name="areaSelect" ref={selectRef}>
             <option value="seoul">서울</option>
             <option value="gyeonggi-do">경기</option>
             <option value="gangwon-do">강원</option>
@@ -150,13 +218,21 @@ const SignUp = () => {
           </select>
         </RegionBox>
       </div>
-      <button onClick={() => {
-        signupAxios();
-      }}
-      // 버튼 비활성화
-      disabled={!username || !nickname || !pwd || !repwd}
+      <SignUpBtn
+        onClick={onSubmit}
+        disabled={
+          !username || 
+          !nickname || 
+          !pwd ||
+          !rePwd ||
+          !isUsername ||
+          !isNickname ||
+          !isPwd ||
+          !isRePwd
+        }  
       >
-        회원가입하기</button>
+        회원가입
+      </SignUpBtn>
     </Wrap>
   );
 };
@@ -165,6 +241,13 @@ const Wrap = styled.div``;
 const IdBox = styled.div``;
 const NicknameBox = styled.div``;
 const PwdBox = styled.div``;
+const Pone = styled.p`
+  color: grey;
+  font-size: 13px;
+`;
+const SignUpBtn = styled.button`
+background-color: ${(props) => (props.disabled ? "#f8cbac" : "#ff8a3a")};
+`;
 const PwdCkBox = styled.div``;
 const RegionBox = styled.div``;
 

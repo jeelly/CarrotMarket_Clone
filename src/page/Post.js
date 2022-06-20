@@ -10,51 +10,44 @@ const Post = () => {
   const dispath = useDispatch();
   const navigate = useNavigate();
 
-//   const content = useSelector((state) => state.content.list);
+  //   const content = useSelector((state) => state.content.list);
 
-  const subjectRef = React.useRef(null);
+  const titleRef = React.useRef(null);
   const priceRef = React.useRef(null);
   const contentRef = React.useRef(null);
   const imageRef = React.useRef(null);
+  const categoryRef = React.useRef(null);
   const imageUrls = new Array();
-
- 
 
   const addContentList = () => {
     // postSubmit();
-  
-    let test = {
-      imageUrl : imageUrls,
-      title: subjectRef.current.value,  //변경 원래 서브젝트
+
+    let list = {
+      imageUrl: imageUrls,
+      title: titleRef.current.value, //변경 원래 서브젝트
       price: priceRef.current.value,
       content: contentRef.current.value,
-      category : "test"
-    }
+      category: categoryRef.current.value
+    };
     debugger;
 
-    dispath(
-      addContentDB(test)
-    );
+    dispath(addContentDB(list));
   };
 
   // 이미지 선택했을 때 input type="file" => onChange 이벤트가 발생했을 때
   const imageUpload = (e) => {
     const formData = new FormData();
 
-    formData.append("image", imageRef.current.files[0])
+    formData.append("image", imageRef.current.files[0]);
 
     // axios.post("http://localhost:8090/image",formData)
-    axios.post("http://whitewise.shop/image",formData)
-    .then((response) => {
-
-
-      var object = {}
+    axios.post("http://whitewise.shop/image", formData).then((response) => {
+      var object = {};
       object["imageUrl"] = response.data;
       imageUrls.push(object);
-        debugger;
+      debugger;
     });
-
-  }
+  };
 
   // const postSubmit = () => {
   //   formData.append("image", imageRef.current.files[0])
@@ -90,14 +83,23 @@ const Post = () => {
 
       <ImgWrap></ImgWrap>
       <div>
-        <input type="file" ref={imageRef} onChange={imageUpload}/>
+        <input type="file" ref={imageRef} onChange={imageUpload} />
         <br />
         <p>글 제목</p>
-        <input type="text" ref={subjectRef} />
+        <input type="text" ref={titleRef} />
         <br />
         <p>가격</p>
         <input type="text" ref={priceRef} />
         <br />
+        <p>카테고리 선택</p>
+        <select name="areaSelect" ref={categoryRef}>
+          <option value="digital">디지털 기기</option>
+          <option value="sport">스포츠/레저</option>
+          <option value="clothing">의류</option>
+          <option value="beauty">뷰티/미용</option>
+          <option value="etc">기타</option>
+        </select>
+        <br/>
         <input
           type="text"
           placeholder="올릴 게시글 내용을 작성해주세요."
