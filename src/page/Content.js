@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useNavigate, Link, useParams} from 'react-router-dom';
 //sub
 import ContentList from '../components/content/ContentList';
+
 const ListItem = () => {
     const { id } = useParams();
     
