@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Detail from '../../page/Detail';
 
 const ContentItem = ({content, id}) => {
-
     const [activeLike, setActiveLike] = useState(false);
+    
     return (
         <div>
             <Item>
                   <ItemImg to={`/detail/${id}`}>
-                      <Img key={id} src={content.imageUrl[0].imageUrl} alt={content.title} />
+                      <Img key={id} src={content?.imageUrl[0].imageUrl} alt={content.title} />
                   </ItemImg>
                   <ItemText>
                     <ItemTitle>{content.title}</ItemTitle>

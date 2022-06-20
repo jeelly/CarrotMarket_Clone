@@ -7,11 +7,11 @@ import { useNavigate, Link, useParams} from 'react-router-dom';
 import ContentList from '../components/content/ContentList';
 const ListItem = () => {
     const { id } = useParams();
-
+    
     return (
       <Container>
         <Title>{id==="top"?"중고 거래 인기매물":"중고 거래 지역매물"}</Title>
-        <ContentList region="서울" />
+        <ContentList region="서울" list={true}/>
       </Container>
     );
 };
