@@ -28,7 +28,7 @@ const SignUp = () => {
   };
 
   const nicknameCheck = (nickname) => {
-    let _reg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{8,10}$/;
+    let _reg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,8}$/;
     //닉네임은 3~8자 한글,영어,숫자
     return _reg.test(nickname);
   };
@@ -66,7 +66,7 @@ const SignUp = () => {
     }
 
     await axios
-      .post("api", users) // api 넣기 !
+      .post("http://whitewise.shop/user/signup", users) // api 넣기 !
       .then((response) => {
         window.alert("회원가입 성공!");
         navigate("/login");
@@ -75,6 +75,26 @@ const SignUp = () => {
         window.alert(error.response.data.errormessage); // api 받으면 에러 콘솔 확인해보기 !
       });
   };
+
+    // 버튼 비활성화
+    const [username, setUsername] = React.useState("");
+    const [nickname, setNickname] = React.useState("");
+    const [pwd, setPwd] = React.useState("");
+    const [repwd, setRePwd] = React.useState("");
+
+    const checkUsername = (e) => {
+      setUsername(e.target.value);
+    };
+    const checkNickname = (e) => {
+      setNickname(e.target.value);
+    };
+    const checkPwd = (e) => {
+      setPwd(e.target.value);
+    };
+    const checkRePwd = (e) => {
+      setRePwd(e.target.value);
+    };
+
   return (
     <Wrap>
       <h1>회원가입</h1>
@@ -82,25 +102,37 @@ const SignUp = () => {
         <IdBox>
           <p>아이디</p>
           <br />
-          <input type="text" ref={id_ref} />
+          <input type="text" ref={id_ref} 
+           // 버튼 비활성화
+           onChange={checkUsername}
+           required/>
           <p>이메일 형식으로 적어주세요.</p>
         </IdBox>
         <NicknameBox>
           <p>닉네임</p>
           <br />
-          <input type="text" ref={name_ref} />
+          <input type="text" ref={name_ref} 
+           // 버튼 비활성화
+           onChange={checkNickname}
+           required/>
           <p>3 ~ 8자 한글,영문,숫자 조합으로 적어주세요.</p>
         </NicknameBox>
         <PwdBox>
           <p>비밀번호</p>
           <br />
-          <input type="password" ref={pwd_ref} />
+          <input type="password" ref={pwd_ref} 
+           // 버튼 비활성화
+           onChange={checkPwd}
+           required/>
           <p>3 ~ 10자 영문, 숫자 및 특수문자조합으로 적어주세요.</p>
         </PwdBox>
         <PwdCkBox>
           <p>비밀번호 확인</p>
           <br />
-          <input type="password" ref={repwd_ref} />
+          <input type="password" ref={repwd_ref} 
+           // 버튼 비활성화
+           onChange={checkRePwd}
+           required/>
         </PwdCkBox>
         <RegionBox>
           <p>지역 선택</p>
@@ -118,7 +150,13 @@ const SignUp = () => {
           </select>
         </RegionBox>
       </div>
-      <button onClick={signupAxios}>회원가입하기</button>
+      <button onClick={() => {
+        signupAxios();
+      }}
+      // 버튼 비활성화
+      disabled={!username || !nickname || !pwd || !repwd}
+      >
+        회원가입하기</button>
     </Wrap>
   );
 };

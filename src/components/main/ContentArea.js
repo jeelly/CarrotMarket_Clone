@@ -10,10 +10,10 @@ const ContentArea = () => {
   return (
     <Container color="#e6e6e6">
       <SubTitle>중고거래 인기매물</SubTitle>
-      <ContentList region="서울"/>
+      <ContentList region="서울" list={false} />
       <MoreLink to="content/top">인기매물 더 보기</MoreLink>
       <SubTitle>중고거래 지역매물</SubTitle>
-      <ContentList region="서울" />
+      <ContentList region="서울" list={false} />
       <MoreLink to="content/region">지역매물 더 보기</MoreLink>
     </Container>
   );
