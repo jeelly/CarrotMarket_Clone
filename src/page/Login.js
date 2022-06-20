@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { loginUserDB } from "../redux/modules/userSlice";
 
 const Login = () => {
- 
   const dispatch = useDispatch();
 
   const id_ref = React.useRef(null);
@@ -28,10 +27,20 @@ const Login = () => {
     } else {
     }
     let users = {
-        username: id_ref.current.value,
-        password: pwd_ref.current.value,
-      };
+      username: id_ref.current.value,
+      password: pwd_ref.current.value,
+    };
     dispatch(loginUserDB(users));
+  };
+
+  // 버튼 비활성화
+  const [username, setUsername] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
+  const checkUsername = (e) => {
+    setUsername(e.target.value);
+  };
+  const checkPwd = (e) => {
+    setPwd(e.target.value);
   };
 
   return (
@@ -41,15 +50,35 @@ const Login = () => {
         <IdBox>
           <p>아이디</p>
           <br />
-          <input type="text" ref={id_ref} />
+          <input
+            type="email"
+            ref={id_ref}
+            // 버튼 비활성화
+            onChange={checkUsername}
+            required
+          />
         </IdBox>
         <PwdBox>
           <p>비밀번호</p>
           <br />
-          <input type="password" ref={pwd_ref} />
+          <input
+            type="password"
+            ref={pwd_ref}
+            // 버튼 비활성화
+            onChange={checkPwd}
+            required
+          />
         </PwdBox>
       </div>
-      <button onClick={login}>로그인하기</button>
+      <Button
+        onClick={() => {
+          login();
+        }}
+        // 버튼 비활성화
+        disabled={!username || !pwd}
+      >
+        로그인하기
+      </Button>
     </Wrap>
   );
 };
@@ -57,5 +86,8 @@ const Login = () => {
 const Wrap = styled.div``;
 const IdBox = styled.div``;
 const PwdBox = styled.div``;
+const Button = styled.button`
+background-color: ${(props) => (props.disabled ? "#f8cbac" : "#ff8a3a")};
+`;
 
 export default Login;
