@@ -7,9 +7,9 @@ export const loginUserDB = ( users ) => {
   return async function (dispatch) {
     await axios
       //서버에 데이터 값 넣기
-      .post("", users)
+      .post("http://whitewise.shop", users)
       .then((response) => {
-        const accessToken = response.data.token; // 토큰 저장안되면 콘솔 찍어서 바꿔주기
+        const accessToken = response.data.accessToken; // 토큰 저장안되면 콘솔 찍어서 바꿔주기
        
         //서버에서 받은 토큰 저장
         localStorage.setItem("Token", `${accessToken}`);

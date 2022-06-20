@@ -15,45 +15,65 @@ const Post = () => {
   const subjectRef = React.useRef(null);
   const priceRef = React.useRef(null);
   const contentRef = React.useRef(null);
-  const imageRef = React.useRef(null)
+  const imageRef = React.useRef(null);
+  const imageUrls = new Array();
 
-  const formData = new FormData();
+ 
 
   const addContentList = () => {
-    postSubmit();
+    // postSubmit();
+  
+    let test = {
+      imageUrl : imageUrls,
+      title: subjectRef.current.value,  //변경 원래 서브젝트
+      price: priceRef.current.value,
+      content: contentRef.current.value,
+      category : "test"
+    }
+    debugger;
+
     dispath(
-      addContentDB({
-        imageUrl: imageRef.current.url,
-        subject: subjectRef.current.value,
-        price: priceRef.current.value,
-        content: contentRef.current.value,
-      })
+      addContentDB(test)
     );
   };
 
-  //이미지 선택했을 때 input type="file" => onChange 이벤트가 발생했을 때
-//   const imageUpload = (e) => {
-//     formData.append("image", imageRef.current.files[0])
-//   }
+  // 이미지 선택했을 때 input type="file" => onChange 이벤트가 발생했을 때
+  const imageUpload = (e) => {
+    const formData = new FormData();
 
-  const postSubmit = () => {
     formData.append("image", imageRef.current.files[0])
-    axios.post("http://주소/",formData).then((response) => {
-    //response.data.imageUrl = "http://주소.jpg"
 
-    // axios.post("http://주소/api/write", {
-    //     subject: "제목",
-    //     content: "내용",
-    //     imageUrl: response.data.imageUrl
-    // }).then((response) => {
-    //     if (response.data.result){
-    //         alert("글 작성 완료!")
-    //     } else {
-    //         alert("글 작성 실패!")
-    //     }
-    // });
+    // axios.post("http://localhost:8090/image",formData)
+    axios.post("http://whitewise.shop/image",formData)
+    .then((response) => {
+
+
+      var object = {}
+      object["imageUrl"] = response.data;
+      imageUrls.push(object);
+        debugger;
     });
+
   }
+
+  // const postSubmit = () => {
+  //   formData.append("image", imageRef.current.files[0])
+  //   axios.post("http://localhost:8090/",formData).then((response) => {
+  //   //response.data.imageUrl = "http://주소.jpg"
+
+  //   // axios.post("http://주소/api/write", {
+  //   //     subject: "제목",
+  //   //     content: "내용",
+  //   //     imageUrl: response.data.imageUrl
+  //   // }).then((response) => {
+  //   //     if (response.data.result){
+  //   //         alert("글 작성 완료!")
+  //   //     } else {
+  //   //         alert("글 작성 실패!")
+  //   //     }
+  //   // });
+  //   });
+  // }
   return (
     <Container>
       <h2>게시글 작성</h2>
@@ -70,7 +90,7 @@ const Post = () => {
 
       <ImgWrap></ImgWrap>
       <div>
-        <input type="file" ref={imageRef} />
+        <input type="file" ref={imageRef} onChange={imageUpload}/>
         <br />
         <p>글 제목</p>
         <input type="text" ref={subjectRef} />

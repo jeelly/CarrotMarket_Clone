@@ -28,7 +28,7 @@ const SignUp = () => {
   };
 
   const nicknameCheck = (nickname) => {
-    let _reg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{8,10}$/;
+    let _reg = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{3,8}$/;
     //닉네임은 3~8자 한글,영어,숫자
     return _reg.test(nickname);
   };
@@ -66,7 +66,7 @@ const SignUp = () => {
     }
 
     await axios
-      .post("api", users) // api 넣기 !
+      .post("http://whitewise.shop/user/signup", users) // api 넣기 !
       .then((response) => {
         window.alert("회원가입 성공!");
         navigate("/login");
