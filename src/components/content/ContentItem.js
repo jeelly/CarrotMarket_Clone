@@ -5,7 +5,7 @@ import Detail from '../../page/Detail';
 
 const ContentItem = ({content, id}) => {
     const [activeLike, setActiveLike] = useState(false);
-    
+
     return (
         <div>
             <Item>

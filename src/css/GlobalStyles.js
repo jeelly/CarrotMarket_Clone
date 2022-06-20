@@ -14,7 +14,5 @@ const GlobalStyles = createGlobalStyle`
     color:black;
     text-decoration:none;
   }
-  body {
-  }
 `;
 export default GlobalStyles;

@@ -6,18 +6,32 @@ import instance from "../../shared/axios";
 // 게시글 불러오기
 export const loadContentDB = (page) => {
   console.log(page)
-  const pagess = page ? page : 1
+  const pagess = page
   console.log(pagess)
   return async function (dispatch, getState) {
-    const response = await instance.get(`/post/top/all/region?page=${pagess}`, { params: {pagess} });
-    // const response = await instance.get(`/content`, { params: {page} });
-    console.log(response)
+    const response = await instance.get(`/post/all/region`, { params: {page:page} });
+    console.log(response.data.content)
     const data = getState().content.list
-    const newstate = [...data, ...response.data];
+    const newstate = [...data, ...response.data.content];
     const pages = page?page+1:1;
     dispatch(loadContent({newstate, pages}));
   };
 };
+//인기 게시글 불러오기
+export const loadTopContentDB = (page) => {
+  console.log(page)
+  const pagess = page
+  console.log(pagess)
+  return async function (dispatch, getState) {
+    const response = await instance.get(`/post/top/all/region`, { params: {page:page} });
+    console.log(response.data.content)
+    const data = getState().content.list
+    const newstate = [...data, ...response.data.content];
+    const pages = page?page+1:1;
+    dispatch(loadTopContent({newstate, pages}));
+  };
+};
+
 // 게시글 삭제
 export const removeContentDB = (targetId) => {
   return async function (dispatch) {
@@ -54,7 +68,12 @@ const userSlice = createSlice({
     loadContent: (state, action) => {
       state.list = [...action.payload.newstate];
       state.pages = action.payload.pages;
-      console.log(state.pages)
+      console.log(state.list)
+    },
+    loadTopContent: (state, action) => {
+      state.list = [...action.payload.newstate];
+      state.pages = action.payload.pages;
+      console.log(state.list)
     },
     removeContent(state, action) {
       console.log(action.payload);
@@ -72,5 +91,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { loadContent, removeContent, addContent } = userSlice.actions;
+export const { loadContent, removeContent, addContent, loadTopContent } = userSlice.actions;
 export default userSlice.reducer;

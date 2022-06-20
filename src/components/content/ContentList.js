@@ -14,11 +14,10 @@ const ContentList = (props) => {
   const content = useSelector((state) => state.content.list);
   const pages = useSelector(state => state.board?.pages);
 
-
   //무한 스크롤
   const [target, setTarget] = useState(null);
   const [page, setPage] = useState(1);
-  console.log(page)
+
     // 인터섹션 callback
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
@@ -47,14 +46,13 @@ const ContentList = (props) => {
     setPage(pages); 
   }, [pages]);
 
-  // console.log(Math.random())
   return (
     <ArticleWrap>
       <Grid>
         {props.region
           ? content &&
             content
-              .filter((l) => props.region === l.region)
+              // .filter((l) => props.region === l.region)
               .filter((l,idx) => (!props.list ? idx < 4 : true))
               .map((l, idx) => (
                   <div key={idx}>
@@ -81,6 +79,7 @@ const ContentList = (props) => {
                   }
               </div>
             ))}
+
       </Grid>
     </ArticleWrap>
   );
