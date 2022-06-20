@@ -35,7 +35,7 @@ const Header = () => {
 
     return (
         <Container>
-            <Link to="/"><Title>당근마켓 로고</Title></Link>
+            <Link to="/"><Title>당근마켓</Title></Link>
             <RightWrap>
             <Search type="text" placeholder='물품이나 동네를 검색해보세요.'/>
             {!is_login && <HeaderLink to="/login">로그인</HeaderLink>}

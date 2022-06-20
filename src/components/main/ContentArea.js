@@ -4,7 +4,7 @@ import styled from "styled-components";
 //router
 import { Link } from 'react-router-dom';
 //Sub
-import ContentList from '../ContentList'
+import ContentList from '../content/ContentList'
 
 const ContentArea = () => {
   return (

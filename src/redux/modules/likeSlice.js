@@ -5,8 +5,8 @@ import axios from 'axios';
 export const loadLikeDB = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get('http://13.209.64.124/like/');
-      dispatch(loadLike(response.data));
+      // const response = await axios.get('http://13.209.64.124/like/');
+      // dispatch(loadLike(response.data));
     } catch (error) {}
   };
 };

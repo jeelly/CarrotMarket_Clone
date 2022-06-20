@@ -31,8 +31,8 @@ const VisualArea = () => {
           <ContentText>동네 주민들과 가깝고 따뜻한 거래를 지금 경험해보세요.
           </ContentText>
           <BtnWrap>
-            <LinkBtn to="/Content" width="160px">인기매물 보기</LinkBtn>
-            <LinkBtn to="/Content" width="220px">믿을 수 있는 중고거래</LinkBtn>
+            <LinkBtn to="/Content/top" width="160px">인기매물 보기</LinkBtn>
+            <LinkBtn to="/Content/region" width="220px">믿을 수 있는 중고거래</LinkBtn>
           </BtnWrap>
         </TextWrap>
       </ArticleWrap>
@@ -105,10 +105,16 @@ const TextWrap = styled.div`
   width:35%;
   margin-left:5%;
   max-width:360px;
+  @media screen and (max-width: 556px) {
+        width:90%;
+  }
 `;
 const ImgWrap = styled.div`
-width:35%;
-overflow:hidden;
+  width:35%;
+  overflow:hidden;
+  @media screen and (max-width: 556px) {
+        width:90%;
+  }
 `
 const Img = styled.img`
   object-fit:contain;
@@ -118,10 +124,16 @@ const SubTitle = styled.h2`
   font-size: 38px;
   text-align: left;
   margin-bottom:32px;
+  @media screen and (max-width: 556px) {
+    text-align:center;
+  }
 `;
 const ContentText = styled.p`
   font-size: 16px;
   text-align: left;
+  @media screen and (max-width: 556px) {
+    text-align:center;
+  }
 `;
 
 const BtnWrap = styled.div`

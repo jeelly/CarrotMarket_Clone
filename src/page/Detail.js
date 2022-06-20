@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 //Router
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -15,6 +15,7 @@ const Detail = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const content = useSelector((state) => state.content.list);
+    const [activeLike, setActiveLike] = useState(false);
 
   // 게시글 삭제 redux 함수 호출
   const onRemoveContent = async () => {
@@ -36,7 +37,7 @@ const Detail = () => {
         <Container>
                 <ImgWrap>
                     <SliderWrap {...settings}>
-                        {content[id]?.imageUrl.map((l, idx) => (
+                        {content[id]?.imageUrl && content[id]?.imageUrl.map((l, idx) => (
                             <Img key={idx} src={l.imageUrl} alt={l.title} />
                         ))}
                     </SliderWrap>                    
@@ -50,13 +51,20 @@ const Detail = () => {
             </UserWrap>
             <BrLine/>
             <ContentWrap>
+                <UpdateBtn to={`/post/${id}`}>수정</UpdateBtn>
                 <DelBtn onClick={onRemoveContent}>삭제</DelBtn>
                 <ContentTitle>{content[id]?.title}</ContentTitle>
                 <ContentOption>{content[id]?.category} · <span> 2022-06-18</span></ContentOption>
                 <ContentPrice>{content[id]?.price}원</ContentPrice>
                 <ContentText>{content[id]?.content}
                 </ContentText>
-                <ContentInfo style={{backgroundImage: `url("https://cdn.icon-icons.com/icons2/2436/PNG/512/photo_image_icon_147448.png")`}}>🤍{content[id]?.likeCount} · 채팅0 · 조회0</ContentInfo>
+                <ContentInfo>채팅0 · 조회0</ContentInfo>
+                {!activeLike? (
+                    <LikeBtn onClick={()=>setActiveLike(true)}>🤍{content[id]?.likeCount}</LikeBtn>
+                ) : 
+                    (
+                    <LikeBtn onClick={()=>setActiveLike(false)}>❤️{content[id]?.likeCount}</LikeBtn>
+                )} 
                 <BrLine/>
             </ContentWrap>
             
@@ -66,12 +74,6 @@ const Detail = () => {
 
 export default Detail;
 
-const BrLine = styled.div`
-    width:100%;
-    height:1px;
-    margin:20px 0;
-    background-color:#878686;
-`
 const Container = styled.div`
     width:40%;
     display:flex;
@@ -79,7 +81,21 @@ const Container = styled.div`
     align-items:flex-start;
     justify-content:center;
     margin:80px auto;
+    @media screen and (max-width: 1200px) {
+        width:80%;
+  }
+    @media screen and (max-width: 1200px) {
+        width:90%;
+  }
 `
+const BrLine = styled.div`
+    width:100%;
+    height:1px;
+    margin:20px 0;
+    background-color:#878686;
+`
+
+
 const ImgWrap = styled.div`
     width:100%;
     margin:0 auto;
@@ -131,17 +147,35 @@ const ContentPrice = styled.strong`
 `
 const ContentText = styled.p`
     text-align:left;
-    margin-bottom:20px;
+    margin-bottom:10px;
 `
 const ContentInfo = styled.p`
     text-align:left;
     font-size:14px;
     color:#878686;
-    
 `
+
+const LikeBtn = styled.p`
+    border:none;
+    font-size:20px;
+    margin-top:6px;
+    background-color:transparent;
+    text-align:left;
+    cursor:pointer;
+`
+
 const DelBtn = styled.button`
     border:none;
     padding:5px 20px;
+    font-size:14px;
     float:right;
     cursor:pointer;
+`
+const UpdateBtn = styled(Link)`
+    border:none;
+    background-color:#f0f0f0;
+    font-size:14px;
+    padding:5px 20px;
+    float:right;
+    margin-left:5px;
 `

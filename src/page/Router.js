@@ -12,7 +12,7 @@ import PageNotFound from'./PageNotFound'
 //Redux
 import { useDispatch } from "react-redux";
 import { loadContentDB } from "../redux/modules/contentSlice";
-import ContentList from "../components/ContentList";
+import ContentList from "../components/content/ContentList";
 
 const Router = () => {
 
@@ -31,8 +31,8 @@ const Router = () => {
       <Route path="/content" element={<Content />} />
       <Route path="/content/:id" element={<Content />} />
       <Route path="/post" element={<Post />} />
+      <Route path="/post/:id" element={<Post />} />
       <Route path="*" element={<PageNotFound />} />
-      <Route path="/ContentList" element={<ContentList />} />
     </Routes>
   );
 };
