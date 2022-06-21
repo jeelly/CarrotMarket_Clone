@@ -6,7 +6,7 @@ import instance from "../../shared/axios";
 // 게시글 불러오기
 export const loadContentDB = (page) => {
   console.log(page)
-  const pagess = page ? page : 1;
+  const pagess = page;
   console.log(pagess)
   return async function (dispatch, getState) {
     const response = await instance.get(`/post/all/region`, { params: {page:pagess} });
@@ -20,10 +20,10 @@ export const loadContentDB = (page) => {
 //인기 게시글 불러오기
 export const loadTopContentDB = (page) => {
   console.log(page)
-  const pagess = page
+  const pagess = page;
   console.log(pagess)
   return async function (dispatch, getState) {
-    const response = await instance.get(`/post/top/all/region`, { params: {page:page} });
+    const response = await instance.get(`/post/top/all/region`, { params: {page:pagess} });
     const data = getState().content.list
     const newstate = [...data, ...response.data.content];
     const pages = page?page+1:1;

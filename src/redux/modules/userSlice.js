@@ -7,12 +7,12 @@ export const loginUserDB = ( users ) => {
   return async function (dispatch) {
     await axios
       //서버에 데이터 값 넣기
-      .post("http://whitewise.shop", users)
+      .post("http://whitewise.shop/user/login", users)
       .then((response) => {
         const accessToken = response.data.accessToken; // 토큰 저장안되면 콘솔 찍어서 바꿔주기
        
         //서버에서 받은 토큰 저장
-        localStorage.setItem("Token", `${accessToken}`);
+        localStorage.setItem("token", `${accessToken}`);
         // const nickname = response.data.nickname;
 
         // 저장된 토큰으로 login 여부 확인

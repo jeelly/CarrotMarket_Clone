@@ -19,8 +19,8 @@ const Router = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadContentDB(1));
-    dispatch(loadTopContentDB(1));
+    dispatch(loadContentDB(0));
+    dispatch(loadTopContentDB(0));
   }, []);
 
   return (
