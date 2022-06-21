@@ -48,7 +48,6 @@ const ContentList = (props) => {
   useEffect(() => {
     setPage(pages); 
   }, [pages]);
-
   
   return (
     <ArticleWrap>
@@ -59,7 +58,7 @@ const ContentList = (props) => {
               .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
               .map((content, idx) => (
                   <div key={idx}>
-                    <ContentItem content={content} id={idx}/>
+                    <ContentItem content={content}/>
                     {props.mainPage ? (<div ref={idx === contents.length - 1 ? setTarget : null}></div>):null}
                   </div>
               ))     
@@ -67,7 +66,7 @@ const ContentList = (props) => {
             .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
             .map((content, idx) => (
               <div key={idx}>
-                  <ContentItem content={content} id={idx} />
+                  <ContentItem content={content}/>
                   {props.mainPage ? (<div ref={idx === contents.length - 1 ? setTarget : null}></div>):null}
               </div>
             ))}

@@ -1,30 +1,37 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Detail from '../../page/Detail';
+//Sub 
+import { loadLikeDB, toggleLikeDB } from '../../redux/modules/likeSlice';
+import Like from '../Like';
 
-const ContentItem = ({content, id}) => {
-    const [activeLike, setActiveLike] = useState(false);
+
+const ContentItem = ({content}) => {
+    const [loading, setLoading] = useState(null);
+    const dispatch = useDispatch()
+    const likes = useSelector((state) => state.like.like);
+    
+    useEffect(() => {
+      setLoading(true);
+      dispatch(loadLikeDB(content.id));
+    }, []);
+
+    // console.log("컨텐츠아이템",content.id,like)
 
     return (
         <div>
             <Item>
-                  <ItemImg to={`/detail/${id}`}>
-                      <Img key={id} src={content?.imageUrl[0].imageUrl} alt={content.title} />
+                  <ItemImg to={`/detail/${content.id}`}>
+                      <Img key={content.id} src={content?.imageUrl[0].imageUrl} alt={content.title} />
                   </ItemImg>
                   <ItemText>
                     <ItemTitle>{content.title}</ItemTitle>
                     <ItemPrice>{content.price}원</ItemPrice>
                     <ItemArea>{content.category}</ItemArea>
                     <ItemOption>
-                        {!activeLike? 
-                            (<><LikeBtn onClick={()=>
-                                setActiveLike(true)
-                            }>🤍 {content.likeCount}</LikeBtn> · 채팅 0 </>):
-                            (<><LikeBtn onClick={()=>
-                                setActiveLike(false)
-                            }>❤️ {content.likeCount}</LikeBtn> · 채팅 0</>)
-                        }
+                        {loading && <Like content={content} likes={likes}/>}
                     </ItemOption>
                   </ItemText>
                 </Item>

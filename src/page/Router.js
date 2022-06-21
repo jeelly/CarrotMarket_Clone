@@ -12,9 +12,11 @@ import PageNotFound from'./PageNotFound'
 //Redux
 import { useDispatch } from "react-redux";
 import { loadContentDB, loadTopContentDB } from "../redux/modules/contentSlice";
+import { loadLikeDB } from "../redux/modules/likeSlice";
 import ContentList from "../components/content/ContentList";
 import ContentTopList from "../components/content/ContentTopList";
 import ContentItem from "../components/content/ContentItem";
+
 
 const Router = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,6 @@ const Router = () => {
     dispatch(loadTopContentDB(0));
     setIsloaded(true);
   }, []);
-
   return (
     <Routes>
       <Route path="/" element={isloaded && <Main />} />

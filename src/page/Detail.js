@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 //Router
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -10,18 +10,43 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { loadLikeDB, toggleLikeDB } from '../redux/modules/likeSlice';
+import Like from '../components/Like';
+
 const Detail = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
-    const content = useSelector((state) => state.content.list);
-    const [activeLike, setActiveLike] = useState(false);
+    const likes = useSelector((state) => state.like.like);
+    const [activeLike, setActiveLike] = useState(true);
+    const [loading, setLoading] = useState(null);
+    const contents = useSelector((state) => state.content.list);
+    const contents_filter = contents.filter((content,idx) => content.id === parseInt(id))
+    const content = contents_filter[0]
 
   // 게시글 삭제 redux 함수 호출
   const onRemoveContent = async () => {
-    await dispatch(removeContentDB(content[id].id));
+    await dispatch(removeContentDB(content.id));
     await navigate(-1)
   };
+
+//   // 게시글 좋아요
+//   useEffect (() => {
+//     async function abc() {
+//         setLoading(true);
+//         await dispatch(loadLikeDB(content?.id));
+//         if(activeLike === null) {
+//             return;
+//         }else {
+//             setActiveLike(like);
+//         }
+//     }
+//     abc()
+//   }, []);
+
+  const togglebtn = async () => {
+    await dispatch(toggleLikeDB(content.id));
+  }
 
   //사진 슬라이드
   const settings = {
@@ -37,7 +62,7 @@ const Detail = () => {
         <Container>
                 <ImgWrap>
                     <SliderWrap {...settings}>
-                        {content[id]?.imageUrl && content[id]?.imageUrl.map((l, idx) => (
+                        {content?.imageUrl && content?.imageUrl.map((l, idx) => (
                             <Img key={idx} src={l.imageUrl} alt={l.title} />
                         ))}
                     </SliderWrap>                    
@@ -51,20 +76,29 @@ const Detail = () => {
             </UserWrap>
             <BrLine/>
             <ContentWrap>
-                <UpdateBtn to={`/post/${id}`}>수정</UpdateBtn>
+                <UpdateBtn to={`/post/${content.id}`}>수정</UpdateBtn>
                 <DelBtn onClick={onRemoveContent}>삭제</DelBtn>
-                <ContentTitle>{content[id]?.title}</ContentTitle>
-                <ContentOption>{content[id]?.category} · <span> 2022-06-18</span></ContentOption>
-                <ContentPrice>{content[id]?.price}원</ContentPrice>
-                <ContentText>{content[id]?.content}
+                <ContentTitle>{content?.title}</ContentTitle>
+                <ContentOption>{content?.category} · <span> 2022-06-18</span></ContentOption>
+                <ContentPrice>{content?.price}원</ContentPrice>
+                <ContentText>{content?.content}
                 </ContentText>
                 <ContentInfo>채팅0 · 조회0</ContentInfo>
-                {!activeLike? (
-                    <LikeBtn onClick={()=>setActiveLike(true)}>🤍{content[id]?.likeCount}</LikeBtn>
+                <Like content={content} likes={likes}/>
+                {/* {activeLike? (
+                    <LikeBtn onClick={()=> {
+                        togglebtn();
+                        setActiveLike(false);
+                    }
+                    }>🤍{content?.likeCount}</LikeBtn>
                 ) : 
                     (
-                    <LikeBtn onClick={()=>setActiveLike(false)}>❤️{content[id]?.likeCount}</LikeBtn>
-                )} 
+                    <LikeBtn onClick={()=> {
+                        togglebtn();
+                        setActiveLike(true);
+                    }
+                    }>❤️{content?.likeCount}</LikeBtn>
+                )}  */}
                 <BrLine/>
             </ContentWrap>
             

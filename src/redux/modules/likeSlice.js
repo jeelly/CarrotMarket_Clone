@@ -1,12 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import instance from "../../shared/axios";
 
-// 좋아요 가져오기
-export const loadLikeDB = () => {
+// 좋아요 목록 가져오기
+export const loadLikeDB = (id) => {
   return async function (dispatch) {
     try {
-      // const response = await axios.get('http://13.209.64.124/like/');
-      // dispatch(loadLike(response.data));
+      const response = await instance.get(`/like/${id}`);
+      console.log(response)
+      const data = response.data
+      dispatch(loadLike({data, id}));
+    } catch (error) {}
+  };
+};
+
+// 좋아요 누르기
+export const toggleLikeDB = (id) => {
+  return async function (dispatch) {
+    try {
+      const response = await instance.post(`/like/${id}`);
     } catch (error) {}
   };
 };
@@ -14,20 +26,12 @@ export const loadLikeDB = () => {
 const likeSlice = createSlice({
   name: 'like',
   initialState: {
-    list: [],
+    like: []
   },
-
   reducers: {
-    // 예시로 하나 남겨두겠습니다.
-    // changeName: (state, action) => {
-    //   state.name = action.payload;
-    // },
     loadLike: (state, action) => {
-      console.log(action.payload);
-      state.list.push(...action.payload);
-    },
-    // updateUser(state, action) {},
-    // removeUser(state, action) {},
+      state.like = action.payload;
+    }
   },
 });
 

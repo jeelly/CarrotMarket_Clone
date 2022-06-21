@@ -87,8 +87,15 @@ const userSlice = createSlice({
     addContent: (state, action) => {
       state.list.push(action.payload);
     },
+    addCount: (state, action) => {
+      // state.list.push
+      // console.log(state.list[1].likeCount)
+      console.log(state.list[action.payload.id].likeCount)
+      state.list[action.payload.id].likeCount =state.list[action.payload.id].likeCount + action.payload.num
+      
+    }
   },
 });
 
-export const { loadContent, removeContent, addContent, loadTopContent } = userSlice.actions;
+export const { loadContent, removeContent, addContent, loadTopContent, addCount } = userSlice.actions;
 export default userSlice.reducer;

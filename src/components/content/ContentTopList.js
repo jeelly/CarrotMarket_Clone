@@ -58,7 +58,7 @@ const ContentTopList = (props) => {
                     .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
                     .map((content, idx) => (
                         <div key={idx}>
-                        <ContentItem content={content} id={idx}/>
+                        <ContentItem content={content}/>
                         {props.mainPage ? (<div ref={idx === contents.length - 1 ? setTarget : null}></div>):null}
                         </div>
                     ))     
@@ -66,7 +66,7 @@ const ContentTopList = (props) => {
                 .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
                 .map((content, idx) => (
                     <div key={idx}>
-                        <ContentItem content={content} id={idx} />
+                        <ContentItem content={content}/>
                         {props.mainPage ? (<div ref={idx === contents.length - 1 ? setTarget : null}></div>):null}
                     </div>
                 ))}
