@@ -10,7 +10,7 @@ import { loginUser } from './redux/modules/userSlice';
 function App() {
   const dispatch = useDispatch();
 
-  // 쿠키에 토큰 있을 시 로그인 체크
+  // 쿠키/로컬스토리지에 토큰 있을 시 로그인 체크
   useEffect(() => {
      if(localStorage.getItem("token") !== null)
       dispatch(loginUser(true));
