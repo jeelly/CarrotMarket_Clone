@@ -16,6 +16,7 @@ const ContentList = (props) => {
   const contents = useSelector((state) => state.content?.list);
   const pages = useSelector(state => state.content?.pages);
 
+  console.log(props)
   //무한 스크롤
   const [target, setTarget] = useState(null);
   const [page, setPage] = useState(1);
@@ -57,7 +58,7 @@ const ContentList = (props) => {
       <Grid>
         {props.region
           ? contents
-              // .filter((content) => props.region === content.region)
+              .filter((content) => props.region === content.region)
               .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
               .map((content, idx) => (
                   <div key={idx}>

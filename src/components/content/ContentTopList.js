@@ -50,7 +50,7 @@ const ContentTopList = (props) => {
             <Grid>
             {props.region
                 ? contents
-                    // .filter((content) => props.region === content.region)
+                    .filter((content) => props.region === content.region)
                     .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
                     .map((content, idx) => (
                         <div key={idx}>

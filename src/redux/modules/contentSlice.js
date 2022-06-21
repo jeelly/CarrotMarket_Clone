@@ -5,9 +5,9 @@ import instance from "../../shared/axios";
 //미들웨어
 // 게시글 불러오기
 export const loadContentDB = (page) => {
-  console.log(page)
+  // console.log(page)
   const pagess = page;
-  console.log(pagess)
+  // console.log(pagess)
   return async function (dispatch, getState) {
     const response = await instance.get(`/post/all/region`, { params: {page:pagess} });
     console.log(response.data.content)
@@ -19,9 +19,9 @@ export const loadContentDB = (page) => {
 };
 //인기 게시글 불러오기
 export const loadTopContentDB = (page) => {
-  console.log(page)
+  // console.log(page)
   const pagess = page;
-  console.log(pagess)
+  // console.log(pagess)
   return async function (dispatch, getState) {
     const response = await instance.get(`/post/top/all/region`, { params: {page:pagess} });
     const data = getState().content.list
@@ -68,19 +68,19 @@ const userSlice = createSlice({
     loadContent: (state, action) => {
       state.list = [...action.payload.newstate];
       state.pages = action.payload.pages;
-      console.log(state.pages)
-      console.log(state.list)
+      // console.log(state.pages)
+      // console.log(state.list)
     },
     loadTopContent: (state, action) => {
       state.toplist = [...action.payload.newstate];
       state.pages = action.payload.pages;
-      console.log(state.pages)
-      console.log(state.toplist)
+      // console.log(state.pages)
+      // console.log(state.toplist)
     },
     removeContent(state, action) {
-      console.log(action.payload);
+      // console.log(action.payload);
       const del = state.list.find((content) => content.id === action.payload);
-      console.log(state.list);
+      // console.log(state.list);
       if (del) {
         state.list = state.list.filter(
           (content) => content.id !== action.payload

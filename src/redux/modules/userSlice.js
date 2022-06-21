@@ -10,9 +10,13 @@ export const loginUserDB = ( users ) => {
       .post("http://whitewise.shop/user/login", users)
       .then((response) => {
         const accessToken = response.data.accessToken; // 토큰 저장안되면 콘솔 찍어서 바꿔주기
-       
+        const accessnickname = response.data.nickname;
+        const accessregion = response.data.region;
+        console.log(response)
         //서버에서 받은 토큰 저장
         localStorage.setItem("token", `${accessToken}`);
+        localStorage.setItem("nickname", `${accessnickname}`);
+        localStorage.setItem("region", `${accessregion}`);
         // const nickname = response.data.nickname;
 
         // 저장된 토큰으로 login 여부 확인
