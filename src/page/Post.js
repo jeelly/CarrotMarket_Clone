@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,41 +12,60 @@ const Post = () => {
 
   //   const content = useSelector((state) => state.content.list);
 
-  const titleRef = React.useRef(null);
-  const priceRef = React.useRef(null);
-  const contentRef = React.useRef(null);
-  const imageRef = React.useRef(null);
-  const categoryRef = React.useRef(null);
-  const imageUrls = new Array();
+  const titleRef = useRef(null);
+  const priceRef = useRef(null);
+  const contentRef = useRef(null);
+  const imageRef = useRef(null);
+  const categoryRef = useRef(null);
 
+  const [imageUrls, setImageUrls] = useState([]);
+
+  //이미지 1장 미리보기 --> e!!!!
+  const selectFile = (e) => {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      var img = document.getElementById("previewImage");
+      img.setAttribute("src", e.target.result);
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  // 이미지 선택했을 때 input type="file" => onChange 이벤트가 발생했을 때
+  // 이미지 1장 업로드
+  const imageUpload = (e) => {
+    selectFile(e);
+    const formData = new FormData();
+
+    formData.append("image", imageRef.current.files[0]);
+
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+
+    // axios.post("http://localhost:8090/image",formData)
+    axios
+      .post("http://whitewise.shop/image", formData, config)
+      .then((response) => {
+        const url = response.data; // 이미지 주소 넣기
+        setImageUrls((current) => [...current, { imageUrl: url }]);
+      });
+  };
+
+  // 등록하기
   const addContentList = () => {
     // postSubmit();
 
     let list = {
       imageUrl: imageUrls,
-      title: titleRef.current.value, //변경 원래 서브젝트
+      title: titleRef.current.value,
       price: priceRef.current.value,
       content: contentRef.current.value,
-      category: categoryRef.current.value
+      category: categoryRef.current.value,
     };
-    debugger;
-
     dispath(addContentDB(list));
-  };
-
-  // 이미지 선택했을 때 input type="file" => onChange 이벤트가 발생했을 때
-  const imageUpload = (e) => {
-    const formData = new FormData();
-
-    formData.append("image", imageRef.current.files[0]);
-
-    // axios.post("http://localhost:8090/image",formData)
-    axios.post("http://whitewise.shop/image", formData).then((response) => {
-      var object = {};
-      object["imageUrl"] = response.data;
-      imageUrls.push(object);
-      debugger;
-    });
+    navigate('/top')
   };
 
   // const postSubmit = () => {
@@ -67,6 +86,7 @@ const Post = () => {
   //   // });
   //   });
   // }
+
   return (
     <Container>
       <h2>게시글 작성</h2>
@@ -81,9 +101,14 @@ const Post = () => {
         </button>
       </div>
 
-      <ImgWrap></ImgWrap>
+      <ImgWrap>
+        <img id="previewImage" alt="넣은 이미지" src=""></img>
+      </ImgWrap>
       <div>
-        <input type="file" ref={imageRef} onChange={imageUpload} />
+        <form className="upload_input">
+          <input type="file" id="image" ref={imageRef} onChange={imageUpload} />
+          <label htmlFor="image">파일 선택하기</label>
+        </form>
         <br />
         <p>글 제목</p>
         <input type="text" ref={titleRef} />
@@ -99,7 +124,7 @@ const Post = () => {
           <option value="beauty">뷰티/미용</option>
           <option value="etc">기타</option>
         </select>
-        <br/>
+        <br />
         <input
           type="text"
           placeholder="올릴 게시글 내용을 작성해주세요."
