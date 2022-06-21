@@ -12,7 +12,7 @@ const Header = () => {
     const navigate = useNavigate();
     const deleteToken = () => {
         // 로그아웃 시 토큰 삭제
-        localStorage.removeItem("Token")
+        localStorage.removeItem("token")
 
         // 로그아웃 시 isLogin --> false 변경
         // setIsLogin(false); --> 쿠키 때만 쓰기
@@ -22,7 +22,7 @@ const Header = () => {
     };
 
     // 로그인 상태 --> 로컬스토리지의 토큰 유무로 확인 (null or 토큰값)
-    const is_login = localStorage.getItem("Token")
+    const is_login = localStorage.getItem("token")
 
     // 컴포넌트 렌더링 시 로그인 여부 체크 
     // useEffect(() => {
@@ -40,8 +40,7 @@ const Header = () => {
             <Search type="text" placeholder='물품이나 동네를 검색해보세요.'/>
             {!is_login && <HeaderLink to="/login">로그인</HeaderLink>}
             {!is_login && <HeaderLink to="/SignUp">회원가입</HeaderLink>}
-
-            {is_login && <HeaderLink onClick={deleteToken}>로그아웃</HeaderLink>}
+            {is_login && <HeaderLink to="/" onClick={deleteToken}>로그아웃</HeaderLink>}
             </RightWrap>
         </Container>
     );

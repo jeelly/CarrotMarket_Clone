@@ -12,7 +12,7 @@ function App() {
 
   // 쿠키에 토큰 있을 시 로그인 체크
   useEffect(() => {
-     if(localStorage.getItem("Token") !== null)
+     if(localStorage.getItem("token") !== null)
       dispatch(loginUser(true));
   });
 
