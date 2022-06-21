@@ -9,15 +9,15 @@ import ContentTopList from "../content/ContentTopList";
 
 const ContentArea = () => {
   const nickname = localStorage.getItem("nickname")
-  const region = localStorage.getItem("region")
-  console.log(region)
+
+
   return (
     <Container color="#e6e6e6">
       <SubTitle>중고거래 인기매물</SubTitle>
-      <ContentTopList region={region} MainPage={true} />
-      <MoreLink to="content/top">인기매물 더 보기</MoreLink>
+      <ContentTopList MainPage={true} />
+      <MoreLink to="content/top">지역 인기매물 더 보기</MoreLink>
       <SubTitle>중고거래 지역매물</SubTitle>
-      <ContentList region={region} MainPage={true} />
+      <ContentList MainPage={true} />
       <MoreLink to="content/region">지역매물 더 보기</MoreLink>
     </Container>
   );

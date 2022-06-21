@@ -5,28 +5,25 @@ import instance from "../../shared/axios";
 //미들웨어
 // 게시글 불러오기
 export const loadContentDB = (page) => {
-  // console.log(page)
   const pagess = page;
-  // console.log(pagess)
   return async function (dispatch, getState) {
     const response = await instance.get(`/post/all/region`, { params: {page:pagess} });
-    console.log(response.data.content)
     const data = getState().content.list
     const newstate = [...data, ...response.data.content];
+    console.log(newstate)
     const pages = page?page+1:1;
     dispatch(loadContent({newstate, pages}));
   };
 };
 //인기 게시글 불러오기
 export const loadTopContentDB = (page) => {
-  // console.log(page)
   const pagess = page;
-  // console.log(pagess)
   return async function (dispatch, getState) {
     const response = await instance.get(`/post/top/all/region`, { params: {page:pagess} });
     const data = getState().content.list
     const newstate = [...data, ...response.data.content];
     const pages = page?page+1:1;
+    console.log(newstate)
     dispatch(loadTopContent({newstate, pages}));
   };
 };
@@ -35,7 +32,7 @@ export const loadTopContentDB = (page) => {
 export const removeContentDB = (targetId) => {
   return async function (dispatch) {
     try {
-      await instance.delete(`/content/${targetId}`);
+      await instance.delete(`/post/${targetId}`);
       dispatch(removeContent(targetId));
     } catch (error) {
       console.log(error);
