@@ -5,15 +5,17 @@ import styled from "styled-components";
 import { Link } from 'react-router-dom';
 //Sub
 import ContentList from '../content/ContentList'
+import ContentTopList from "../content/ContentTopList";
 
 const ContentArea = () => {
+  console.log(ContentList)
   return (
     <Container color="#e6e6e6">
       <SubTitle>중고거래 인기매물</SubTitle>
-      <ContentList region="서울" list={false} />
+      <ContentTopList region="서울" MainPage={true} />
       <MoreLink to="content/top">인기매물 더 보기</MoreLink>
       <SubTitle>중고거래 지역매물</SubTitle>
-      <ContentList region="서울" list={false} />
+      <ContentList region="서울" MainPage={true} />
       <MoreLink to="content/region">지역매물 더 보기</MoreLink>
     </Container>
   );

@@ -6,10 +6,10 @@ import instance from "../../shared/axios";
 // 게시글 불러오기
 export const loadContentDB = (page) => {
   console.log(page)
-  const pagess = page
+  const pagess = page ? page : 1;
   console.log(pagess)
   return async function (dispatch, getState) {
-    const response = await instance.get(`/post/all/region`, { params: {page:page} });
+    const response = await instance.get(`/post/all/region`, { params: {page:pagess} });
     console.log(response.data.content)
     const data = getState().content.list
     const newstate = [...data, ...response.data.content];
@@ -24,7 +24,6 @@ export const loadTopContentDB = (page) => {
   console.log(pagess)
   return async function (dispatch, getState) {
     const response = await instance.get(`/post/top/all/region`, { params: {page:page} });
-    console.log(response.data.content)
     const data = getState().content.list
     const newstate = [...data, ...response.data.content];
     const pages = page?page+1:1;
@@ -62,18 +61,21 @@ const userSlice = createSlice({
   initialState: {
     //is_login 넣어서 함수,
     list: [],
+    toplist: [],
     //is_login
   },
   reducers: {
     loadContent: (state, action) => {
       state.list = [...action.payload.newstate];
       state.pages = action.payload.pages;
+      console.log(state.pages)
       console.log(state.list)
     },
     loadTopContent: (state, action) => {
-      state.list = [...action.payload.newstate];
+      state.toplist = [...action.payload.newstate];
       state.pages = action.payload.pages;
-      console.log(state.list)
+      console.log(state.pages)
+      console.log(state.toplist)
     },
     removeContent(state, action) {
       console.log(action.payload);

@@ -5,20 +5,22 @@ import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import ContentItem from "./ContentItem";
 import {  } from'react-redux';
 import { loadContentDB } from '../../redux/modules/contentSlice';
+//Sub
+import ContentItem from "./ContentItem";
+
 
 const ContentList = (props) => {
   const dispatch = useDispatch();
-  const content = useSelector((state) => state.content.list);
-  const pages = useSelector(state => state.board?.pages);
+  const contents = useSelector((state) => state.content?.list);
+  const pages = useSelector(state => state.content?.pages);
 
   //무한 스크롤
   const [target, setTarget] = useState(null);
   const [page, setPage] = useState(1);
 
-    // 인터섹션 callback
+  // 인터섹션 callback
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
       observer.unobserve(entry.target);
@@ -41,45 +43,36 @@ const ContentList = (props) => {
       };
   }, [target]);
   
+
   // 무한스크롤 구현 중 다른 페이지 이동 했을때 재랜더링 되는걸 방지
   useEffect(() => {
     setPage(pages); 
   }, [pages]);
 
+
+    console.log(contents.length)
+
   return (
     <ArticleWrap>
       <Grid>
         {props.region
-          ? content &&
-            content
-              // .filter((l) => props.region === l.region)
-              .filter((l,idx) => (!props.list ? idx < 4 : true))
-              .map((l, idx) => (
+          ? contents
+              // .filter((content) => props.region === content.region)
+              .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
+              .map((content, idx) => (
                   <div key={idx}>
-                    <ContentItem content={l} id={idx}/>
-                  {props.list ?
-                  (
-                    <div ref={idx === content.length - 1  ? setTarget : null}></div>
-                    ) : (
-                      null  
-                    )
-                  }
-                   </div>
+                    <ContentItem content={content} id={idx}/>
+                    {props.mainPage ? (<div ref={idx === contents.length - 1 ? setTarget : null}></div>):null}
+                  </div>
               ))     
-          : content &&
-            content
-            .filter((l,idx) => (!props.list ? idx < 4 : true))
-            .map((l, idx) => (
+          : contents
+            .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
+            .map((content, idx) => (
               <div key={idx}>
-                  <ContentItem content={l} id={idx} />
-                {props.list?(
-                    <div ref={idx === content.length - 1 ? setTarget : null}></div> ) : (
-                      null  
-                    )
-                  }
+                  <ContentItem contents={content} id={idx} />
+                  {props.mainPage ? (<div ref={idx === contents.length - 1 ? setTarget : null}></div>):null}
               </div>
             ))}
-
       </Grid>
     </ArticleWrap>
   );

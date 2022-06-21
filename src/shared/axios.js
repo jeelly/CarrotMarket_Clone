@@ -7,8 +7,8 @@ const instance = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 //토큰값
-// const token = getCookie("is_login");
-// instance.defaults.headers.common["Authorization"] = `Bearer ${token}`; 
+const token = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRlc3RAbmF2ZXIuY29tIiwiaWF0IjoxNjU1Nzc1Njk5LCJleHAiOjE2NTYzODA0OTl9.Rm6XrFUKEDjRS_waIcde5tJPvIE-b-Yaq7GBzSNY148";
+instance.defaults.headers.common["Authorization"] = `Bearer ${token}`; 
 
 
 // instance.defaults.headers.common["Authorization"] = `Bearer 임시토큰`; 

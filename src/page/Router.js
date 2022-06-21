@@ -11,14 +11,16 @@ import Post from'./Post'
 import PageNotFound from'./PageNotFound'
 //Redux
 import { useDispatch } from "react-redux";
-import { loadContentDB } from "../redux/modules/contentSlice";
+import { loadContentDB, loadTopContentDB } from "../redux/modules/contentSlice";
 import ContentList from "../components/content/ContentList";
+import ContentTopList from "../components/content/ContentTopList";
 
 const Router = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadContentDB(0));
+    dispatch(loadContentDB(1));
+    dispatch(loadTopContentDB(1));
   }, []);
 
   return (
@@ -33,6 +35,8 @@ const Router = () => {
       <Route path="/post" element={<Post />} />
       <Route path="/post/:id" element={<Post />} />
       <Route path="*" element={<PageNotFound />} />
+      {/* 임시삭제예정 */}
+      <Route path="/contenttop" element={<ContentTopList />} />
     </Routes>
   );
 };

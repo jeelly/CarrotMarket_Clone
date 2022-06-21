@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useNavigate, Link, useParams} from 'react-router-dom';
 //sub
 import ContentList from '../components/content/ContentList';
+import ContentTopList from '../components/content/ContentTopList';
 
 const ListItem = () => {
     const { id } = useParams();
@@ -12,7 +13,10 @@ const ListItem = () => {
     return (
       <Container>
         <Title>{id==="top"?"중고 거래 인기매물":"중고 거래 지역매물"}</Title>
-        <ContentList region="서울" list={true}/>
+        {id==="top"? 
+            <ContentTopList region="서울" mainPage={true}/> :
+            <ContentList region="서울" mainPage={true}/>
+        }
       </Container>
     );
 };
