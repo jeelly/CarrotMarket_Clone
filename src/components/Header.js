@@ -13,6 +13,8 @@ const Header = () => {
     const deleteToken = () => {
         // 로그아웃 시 토큰 삭제
         localStorage.removeItem("token")
+        localStorage.removeItem("nickname")
+        localStorage.removeItem("region")
 
         // 로그아웃 시 isLogin --> false 변경
         // setIsLogin(false); --> 쿠키 때만 쓰기

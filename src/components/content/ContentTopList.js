@@ -12,7 +12,9 @@ const ContentTopList = (props) => {
   const dispatch = useDispatch();
   const contents = useSelector((state) => state.content?.toplist);
   const pages = useSelector((state) => state.content?.pages);
+  const regions = localStorage.getItem("region")
 
+  console.log(contents)
   //무한 스크롤
   const [target, setTarget] = useState(null);
   const [page, setPage] = useState(1);
@@ -45,12 +47,14 @@ const ContentTopList = (props) => {
     setPage(pages);
   }, [pages]);
 
+  
+
   return (
         <ArticleWrap>
             <Grid>
-            {props.region
+            {regions
                 ? contents
-                    .filter((content) => props.region === content.region)
+                    .filter((content) => regions === content.region)
                     .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
                     .map((content, idx) => (
                         <div key={idx}>
@@ -62,7 +66,7 @@ const ContentTopList = (props) => {
                 .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
                 .map((content, idx) => (
                     <div key={idx}>
-                        <ContentItem contents={content} id={idx} />
+                        <ContentItem content={content} id={idx} />
                         {props.mainPage ? (<div ref={idx === contents.length - 1 ? setTarget : null}></div>):null}
                     </div>
                 ))}
