@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { loginUserDB } from "../redux/modules/userSlice";
+import "../css/LoginStyles.css"
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -77,14 +78,15 @@ const onChangeUsername = useCallback((e) => {
   };
   
   return (
-    <Wrap>
-      <h1>로그인</h1>
+    <form className="login">
+      <h3>로그인</h3>
       <div>
         <IdBox>
           <p>아이디</p>
           <br />
           <input
             type="email"
+            placeholder="Username"
             ref={usernameRef}
             // 버튼 비활성화
             onChange={onChangeUsername}
@@ -98,11 +100,12 @@ const onChangeUsername = useCallback((e) => {
             )}
           </Pone>
         </IdBox>
-        <IdBox>
+        <PwdBox>
           <p>비밀번호</p>
           <br />
           <input
             type="password"
+            placeholder="Password"
             ref={passwordRef}
             // 버튼 비활성화
             onChange={onChangePassword}
@@ -116,7 +119,7 @@ const onChangeUsername = useCallback((e) => {
               </span>
             )}
           </Pone>
-        </IdBox>
+        </PwdBox>
       </div>
       <Button
         onClick={() => {
@@ -127,18 +130,33 @@ const onChangeUsername = useCallback((e) => {
       >
         로그인
       </Button>
-    </Wrap>
+    </form>
   );
 };
 
-const Wrap = styled.div``;
+// const Wrap = styled.div``;
 const IdBox = styled.div``;
 const PwdBox = styled.div``;
 const Button = styled.button`
-  background-color: ${(props) => (props.disabled ? "#f8cbac" : "#ff8a3a")};
+  font-family: "Asap", sans-serif;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 80px;
+  border: 0;
+  padding: 10px 0;
+  margin-top: 10px;
+  margin-left: -5px;
+  border-radius: 5px;
+  /* background-color: #f45b69; */
+  background-color: ${(props) => (props.disabled ? "#f8cbac" : "#f45b69")};
+  -webkit-transition: background-color 300ms;
+  -moz-transition: background-color 300ms;
+  transition: background-color 300ms;
 `;
 const Pone = styled.p`
-  color: grey;
+  color: #444;
   font-size: 13px;
 `;
 export default Login;

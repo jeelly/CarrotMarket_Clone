@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import "../css/SignStyle.css"
+
 const SignUp = () => {
   const navigate = useNavigate();
 
@@ -123,6 +125,7 @@ const onChangeRePwd = useCallback(
   };
 
   return (
+    <form className="Signup">
     <Wrap>
       <h1>회원가입</h1>
       <div>
@@ -232,6 +235,7 @@ const onChangeRePwd = useCallback(
         회원가입
       </SignUpBtn>
     </Wrap>
+    </form>
   );
 };
 
@@ -240,11 +244,26 @@ const IdBox = styled.div``;
 const NicknameBox = styled.div``;
 const PwdBox = styled.div``;
 const Pone = styled.p`
-  color: grey;
+  color: #444;
   font-size: 13px;
 `;
 const SignUpBtn = styled.button`
-background-color: ${(props) => (props.disabled ? "#f8cbac" : "#ff8a3a")};
+  font-family: "Asap", sans-serif;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 80px;
+  border: 0;
+  padding: 10px 0;
+  margin-top: 10px;
+  margin-left: -5px;
+  border-radius: 5px;
+  /* background-color: #f45b69; */
+  background-color: ${(props) => (props.disabled ? "#f8cbac" : "#f45b69")};
+  -webkit-transition: background-color 300ms;
+  -moz-transition: background-color 300ms;
+  transition: background-color 300ms;
 `;
 const PwdCkBox = styled.div``;
 const RegionBox = styled.div``;

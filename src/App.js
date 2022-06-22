@@ -22,8 +22,9 @@ function App() {
       <Routerwrap>
         <Router />
       </Routerwrap>
-      <Footer />
+     
       <GlobalStyles />
+      <Footer />
     </Container>
   );
 }
