@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import {} from "react-redux";
 import { loadTopContentDB } from "../../redux/modules/contentSlice";
 //Sub
 import ContentItem from "./ContentItem";
@@ -11,19 +10,18 @@ import ContentItem from "./ContentItem";
 const ContentTopList = (props) => {
   const dispatch = useDispatch();
   const contents = useSelector((state) => state.content?.toplist);
-  const pages = useSelector((state) => state.content?.pages);
+  const pages = useSelector((state) => state.content?.top_pages);
   const regions = localStorage.getItem("region")
 
-  console.log(contents)
+  console.log(pages)
   //무한 스크롤
   const [target, setTarget] = useState(null);
-  const [page, setPage] = useState(1);
 
-  // 인터섹션 callback
+  //인터섹션 callback
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
       observer.unobserve(entry.target);
-      await dispatch(loadTopContentDB(page));
+      await dispatch(loadTopContentDB(pages));
     }
   };
 
@@ -31,7 +29,6 @@ const ContentTopList = (props) => {
   useEffect(() => {
     let observer;
     if (target) {
-      setPage(page + 1);
       observer = new IntersectionObserver(onIntersect, {
         threshold: 0.5,
       });
@@ -41,11 +38,6 @@ const ContentTopList = (props) => {
       observer && observer.disconnect();
     };
   }, [target]);
-
-  // 무한스크롤 구현 중 다른 페이지 이동 했을때 재랜더링 되는걸 방지
-  useEffect(() => {
-    setPage(pages);
-  }, [pages]);
 
   
 

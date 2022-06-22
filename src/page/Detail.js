@@ -3,7 +3,7 @@ import styled from 'styled-components';
 //Router
 import { Link, useNavigate, useParams } from "react-router-dom";
 //redux
-import { removeContentDB } from '../redux/modules/contentSlice';
+import { DetailContentDB, removeContentDB } from '../redux/modules/contentSlice';
 import { useSelector, useDispatch } from 'react-redux';
 //slick
 import Slider from 'react-slick';
@@ -20,29 +20,24 @@ const Detail = () => {
     const likes = useSelector((state) => state.like.like);
     const [activeLike, setActiveLike] = useState(true);
     const [loading, setLoading] = useState(null);
-    const contents = useSelector((state) => state.content.list);
-    const contents_filter = contents.filter((content,idx) => content.id === parseInt(id))
-    const content = contents_filter[0]
+    const content = useSelector((state) => state.content.detail);
+
+    const writer = localStorage.getItem("nickname")
+    console.log(writer)
+    console.log(content.user?.nickname)
+
+  useEffect (() => {
+    setLoading(true);
+    dispatch(loadLikeDB(content.id));
+    dispatch(DetailContentDB(id));
+  }, []);
+
 
   // 게시글 삭제 redux 함수 호출
   const onRemoveContent = async () => {
     await dispatch(removeContentDB(content.id));
     await navigate(-1)
   };
-
-//   // 게시글 좋아요
-//   useEffect (() => {
-//     async function abc() {
-//         setLoading(true);
-//         await dispatch(loadLikeDB(content?.id));
-//         if(activeLike === null) {
-//             return;
-//         }else {
-//             setActiveLike(like);
-//         }
-//     }
-//     abc()
-//   }, []);
 
   const togglebtn = async () => {
     await dispatch(toggleLikeDB(content.id));
@@ -76,29 +71,20 @@ const Detail = () => {
             </UserWrap>
             <BrLine/>
             <ContentWrap>
-                <UpdateBtn to={`/post/${content.id}`}>수정</UpdateBtn>
-                <DelBtn onClick={onRemoveContent}>삭제</DelBtn>
+                {content.user?.nickname === writer ? (
+                    <>
+                        <UpdateBtn to={`/post/${content.id}`}>수정</UpdateBtn>
+                        <DelBtn onClick={onRemoveContent}>삭제</DelBtn>
+                    </>
+                ) : null}
+                    
                 <ContentTitle>{content?.title}</ContentTitle>
                 <ContentOption>{content?.category} · <span> 2022-06-18</span></ContentOption>
                 <ContentPrice>{content?.price}원</ContentPrice>
                 <ContentText>{content?.content}
                 </ContentText>
                 <ContentInfo>채팅0 · 조회0</ContentInfo>
-                <Like content={content} likes={likes}/>
-                {/* {activeLike? (
-                    <LikeBtn onClick={()=> {
-                        togglebtn();
-                        setActiveLike(false);
-                    }
-                    }>🤍{content?.likeCount}</LikeBtn>
-                ) : 
-                    (
-                    <LikeBtn onClick={()=> {
-                        togglebtn();
-                        setActiveLike(true);
-                    }
-                    }>❤️{content?.likeCount}</LikeBtn>
-                )}  */}
+                <LikeBtn>{loading && <Like content={content} likes={likes}/>}</LikeBtn>
                 <BrLine/>
             </ContentWrap>
             
@@ -189,7 +175,7 @@ const ContentInfo = styled.p`
     color:#878686;
 `
 
-const LikeBtn = styled.p`
+const LikeBtn = styled.div`
     border:none;
     font-size:20px;
     margin-top:6px;

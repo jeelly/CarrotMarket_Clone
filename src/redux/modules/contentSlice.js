@@ -5,26 +5,31 @@ import instance from "../../shared/axios";
 //미들웨어
 // 게시글 불러오기
 export const loadContentDB = (page) => {
-  const pagess = page;
   return async function (dispatch, getState) {
-    const response = await instance.get(`/post/all/region`, { params: {page:pagess} });
+    const response = await instance.get(`/post/all/region`, { params: {page:page} });
     const data = getState().content.list
     const newstate = [...data, ...response.data.content];
-    console.log(newstate)
-    const pages = page?page+1:1;
+    const pages = page + 1;
     dispatch(loadContent({newstate, pages}));
   };
 };
 //인기 게시글 불러오기
 export const loadTopContentDB = (page) => {
-  const pagess = page;
   return async function (dispatch, getState) {
-    const response = await instance.get(`/post/top/all/region`, { params: {page:pagess} });
-    const data = getState().content.list
+    const response = await instance.get(`/post/top/all/region`, { params: {page:page} });
+    const data = getState().content.toplist
     const newstate = [...data, ...response.data.content];
-    const pages = page?page+1:1;
-    console.log(newstate)
+    const pages = page + 1;
     dispatch(loadTopContent({newstate, pages}));
+  };
+};
+
+//디테일 페이지 불러오기
+export const DetailContentDB = (id) => {
+  return async function (dispatch) {
+    const response = await instance.get(`/post/detail/${id}`,);
+    console.log(response.data)
+    dispatch(DetailContent(response.data));
   };
 };
 
@@ -53,31 +58,44 @@ export const addContentDB = (data) => {
   };
 };
 
+//add count
+export const addCountDB = (data) => {
+  return async function (dispatch) {
+    console.log(data)
+    const response = await instance.get(`/post/detail/${data.id}`,);
+    const newlikeCount = (response.data.likeCount)
+    dispatch(addCount({newlikeCount, data}));
+  };
+};
+
+
 const userSlice = createSlice({
   name: "content",
   initialState: {
     //is_login 넣어서 함수,
     list: [],
     toplist: [],
+    detail: [],
+    pages:0,
+    top_pages:0,
+    likeCnt:0,
     //is_login
   },
   reducers: {
     loadContent: (state, action) => {
       state.list = [...action.payload.newstate];
       state.pages = action.payload.pages;
-      // console.log(state.pages)
-      // console.log(state.list)
     },
     loadTopContent: (state, action) => {
       state.toplist = [...action.payload.newstate];
-      state.pages = action.payload.pages;
-      // console.log(state.pages)
-      // console.log(state.toplist)
+      state.top_pages = action.payload.pages;
+    },
+    DetailContent: (state, action) => {
+      console.log(action.payload)
+      state.detail = action.payload
     },
     removeContent(state, action) {
-      // console.log(action.payload);
       const del = state.list.find((content) => content.id === action.payload);
-      // console.log(state.list);
       if (del) {
         state.list = state.list.filter(
           (content) => content.id !== action.payload
@@ -88,14 +106,12 @@ const userSlice = createSlice({
       state.list.push(action.payload);
     },
     addCount: (state, action) => {
-      // state.list.push
-      // console.log(state.list[1].likeCount)
-      console.log(state.list[action.payload.id].likeCount)
-      state.list[action.payload.id].likeCount =state.list[action.payload.id].likeCount + action.payload.num
-      
+      state.list[action.payload.data.id].likeCount = action.payload.newlikeCount
+      state.toplist[action.payload.data.id].likeCount = action.payload.newlikeCount
+      state.detail.likeCount = action.payload.newlikeCount
     }
   },
 });
 
-export const { loadContent, removeContent, addContent, loadTopContent, addCount } = userSlice.actions;
+export const { loadContent, loadTopContent, DetailContent, removeContent, addContent, addCount} = userSlice.actions;
 export default userSlice.reducer;

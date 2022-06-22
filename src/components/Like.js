@@ -3,26 +3,23 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleLikeDB } from "../redux/modules/likeSlice";
 import { act } from "react-dom/test-utils";
-import { addCount, loadContentDB } from "../redux/modules/contentSlice";
+import { addCountDB } from "../redux/modules/contentSlice";
 
 const Like = ({ content, likes }) => {
   const dispatch = useDispatch();
   const [activeLike, setActiveLike] = useState(true);
-  const [count, setCount] = useState(content.likeCount);
+  const [count, setCount] = useState(0);
 
 useEffect(() => {
     if(likes.id === content.id) {
         setActiveLike(likes.data)
+        setCount(content.likeCount)
     }
   }, [likes]);
 
-  console.log("asdas",content.likeCount)
-  // useEffect(() => {
-  // }, [count]);
-
   const togglebtn = async () => {
     await dispatch(toggleLikeDB(content?.id));
-    await dispatch(addCount({id:content?.id,num:activeLike===false?-1:+1}))
+    await dispatch(addCountDB({id:content?.id}))
   };
   return (
     <>

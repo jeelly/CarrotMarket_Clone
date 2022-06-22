@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import {  } from'react-redux';
 import { loadContentDB } from '../../redux/modules/contentSlice';
 //Sub
 import ContentItem from "./ContentItem";
@@ -16,15 +15,15 @@ const ContentList = (props) => {
   const contents = useSelector((state) => state.content?.list);
   const pages = useSelector(state => state.content?.pages);
   const regions = localStorage.getItem("region")
+
   //무한 스크롤
   const [target, setTarget] = useState(null);
-  const [page, setPage] = useState(1);
 
   // 인터섹션 callback
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
       observer.unobserve(entry.target);
-      await dispatch(loadContentDB(page));
+      await dispatch(loadContentDB(pages));
     }
   };
 
@@ -32,7 +31,6 @@ const ContentList = (props) => {
   useEffect(() => {
       let observer;
       if (target) {
-        setPage(page + 1);
         observer = new IntersectionObserver(onIntersect, {
         threshold: 0.5,
       });
@@ -42,12 +40,6 @@ const ContentList = (props) => {
       observer && observer.disconnect();
       };
   }, [target]);
-  
-
-  // 무한스크롤 구현 중 다른 페이지 이동 했을때 재랜더링 되는걸 방지
-  useEffect(() => {
-    setPage(pages); 
-  }, [pages]);
   
   return (
     <ArticleWrap>
