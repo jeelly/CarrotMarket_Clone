@@ -1,3 +1,6 @@
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -5,12 +8,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { addContentDB } from "../redux/modules/contentSlice";
+// import CardSlide from "../redux/modules/cardSlice"
+import Slider from "react-slick";
 
 const Post = () => {
   const dispath = useDispatch();
   const navigate = useNavigate();
-
-  //   const content = useSelector((state) => state.content.list);
 
   const titleRef = useRef(null);
   const priceRef = useRef(null);
@@ -19,21 +22,28 @@ const Post = () => {
   const categoryRef = useRef(null);
 
   const [imageUrls, setImageUrls] = useState([]);
+  const [showImages, setShowImages] = useState([])
 
   //이미지 1장 미리보기 --> e!!!!
-  const selectFile = (e) => {
-    let reader = new FileReader();
-    reader.onload = (e) => {
-      var img = document.getElementById("previewImage");
-      img.setAttribute("src", e.target.result);
-    };
-    reader.readAsDataURL(e.target.files[0]);
-  };
+  // const selectFile = (e) => {
+  //   // let reader = new FileReader();
+  //   // reader.readAsDataURL(e.target.files[0]);
+  //   // reader.onload = (e) => {
+  //   //   let img = document.getElementById("previewImage");
+  //   //   img.setAttribute("src", e.target.result);
+  //   //   // imageList[0] = reader.result
+  //   //   setShowImages([...showImages, e.target.result])
+  //   // };
+    
+  // };
 
+  useEffect(() => {
+    console.log(imageUrls);
+  }, [imageUrls])
   // 이미지 선택했을 때 input type="file" => onChange 이벤트가 발생했을 때
   // 이미지 1장 업로드
   const imageUpload = (e) => {
-    selectFile(e);
+    // selectFile(e);
     const formData = new FormData();
 
     formData.append("image", imageRef.current.files[0]);
@@ -46,11 +56,11 @@ const Post = () => {
 
     // axios.post("http://localhost:8090/image",formData)
     axios
-      .post("http://whitewise.shop/image", formData, config)
-      .then((response) => {
-        const url = response.data; // 이미지 주소 넣기
-        setImageUrls((current) => [...current, { imageUrl: url }]);
-      });
+    .post("http://whitewise.shop/image", formData, config)
+    .then((response) => {
+      const url = response.data; // 이미지 주소 넣기
+      setImageUrls((current) => [...current, { imageUrl: url }]);
+    });
   };
 
   // 등록하기
@@ -87,6 +97,14 @@ const Post = () => {
   //   });
   // }
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  }
+
   return (
     <Container>
       <h2>게시글 작성</h2>
@@ -100,14 +118,26 @@ const Post = () => {
           취소
         </button>
       </div>
-
-      <ImgWrap>
-        <img id="previewImage" alt="넣은 이미지" src=""></img>
-      </ImgWrap>
+      
+      <div style={{ width: "500px", height: "500px", overflow: "hidden"}}>
+        <Slider {...settings}>
+          {imageUrls.map((image, index) => {
+            return <div key={index}><img style={{width: "400px", height: "400px", objectFit: "cover"}} src={image.imageUrl} alt="test"/></div>
+          })}
+        </Slider>
+      </div>
+      {/* <CardSlide id="previewImage" image={showImages}>
+        
+        </CardSlide> */}
+      {/* <ImgWrap> 
+        {imageUrls.map((image, index) => {
+          return <div key={index}><img src={image.imageUrl} alt="test"/></div>
+        })}
+      </ImgWrap> */}
       <div>
         <form className="upload_input">
           <input type="file" id="image" ref={imageRef} onChange={imageUpload} />
-          <label htmlFor="image">파일 선택하기</label>
+          
         </form>
         <br />
         <p>글 제목</p>
@@ -152,5 +182,4 @@ const ImgWrap = styled.div`
   overflow: hidden;
   background-color: black;
 `;
-
 export default Post;
