@@ -66,16 +66,20 @@ const Post = () => {
   // 등록하기
   const addContentList = () => {
     // postSubmit();
+    const uncomma = (str) => {
+      str = String(str);
+      return str.replace(/[^\d]+/g, "");
+    };
 
     let data = {
       imageUrl: imageUrls,
       title: titleRef.current.value,
-      price: parseInt(priceRef.current.value),
+      price: uncomma(priceRef.current.value),
       content: contentRef.current.value,
       category: categoryRef.current.value,
     };
     dispath(addContentDB(data));
-    navigate('/top')
+    window.location.replace("/content/region")
   };
 
   // const postSubmit = () => {
@@ -97,6 +101,8 @@ const Post = () => {
   //   });
   // }
 
+
+//콤마 찍기
   const [num, setNum] = React.useState();
 
   const inputPriceFormat = (str) => {
@@ -110,6 +116,12 @@ const Post = () => {
     };
     return comma(uncomma(str));
   };
+  // setNum(num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+
+  //콤마 제거
+  // const commaRemovePrice = num?.replace(/,/g, "");
+  // let numberPrice = parseInt(commaRemovePrice);
+
 
   const settings = {
     dots: true,
@@ -121,18 +133,17 @@ const Post = () => {
 
   return (
     <Container>
-      <h2>게시글 작성</h2>
-      <div>
-        <button onClick={addContentList}>등록</button>
-        <button
+      <TitleText>게시글 작성</TitleText>
+      <Buttons>
+        <AddBtn onClick={addContentList}>등록</AddBtn>
+        <CancelBtn
           onClick={() => {
             navigate("/");
           }}
         >
           취소
-        </button>
-      </div>
-      
+        </CancelBtn>
+      </Buttons>
       <div style={{ width: "500px", height: "500px", overflow: "hidden"}}>
         <Slider {...settings}>
           {imageUrls.map((image, index) => {
@@ -167,11 +178,11 @@ const Post = () => {
         <br />
         <p>카테고리 선택</p>
         <select name="areaSelect" ref={categoryRef}>
-          <option value="digital">디지털 기기</option>
-          <option value="sport">스포츠/레저</option>
-          <option value="clothing">의류</option>
-          <option value="beauty">뷰티/미용</option>
-          <option value="etc">기타</option>
+          <option value="디지털">디지털 기기</option>
+          <option value="스포츠">스포츠/레저</option>
+          <option value="의류">의류</option>
+          <option value="뷰티">뷰티/미용</option>
+          <option value="기타">기타</option>
         </select>
         <br />
         <input
@@ -183,7 +194,19 @@ const Post = () => {
     </Container>
   );
 };
+const TitleText = styled.h1`
 
+`
+const Buttons = styled.div`
+display:flex;
+justify-content:row;
+`
+const AddBtn = styled.button`
+
+`
+const CancelBtn = styled.button`
+
+`
 const Container = styled.div`
   width: 50%;
   display: flex;
