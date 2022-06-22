@@ -18,8 +18,6 @@ const ContentItem = ({content}) => {
       dispatch(loadLikeDB(content.id));
     }, []);
 
-    // console.log("컨텐츠아이템",content.id,like)
-
     return (
         <div>
             <Item>

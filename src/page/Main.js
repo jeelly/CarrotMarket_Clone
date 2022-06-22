@@ -7,12 +7,16 @@ import ContentArea from '../components/main/ContentArea';
 //router
 import { Link } from 'react-router-dom';
 
+const is_login = localStorage.getItem("token")
+
+// console.log(is_logion)
+
 const Main = () => {
     return (
       <Container>
         <VisualArea></VisualArea>
         <ContentArea></ContentArea>
-        <PostBtn to="/post">+</PostBtn>
+        {is_login && <PostBtn to="/post">+</PostBtn>}
       </Container>
     );
 };

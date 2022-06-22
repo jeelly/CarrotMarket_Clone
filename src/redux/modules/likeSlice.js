@@ -7,7 +7,7 @@ export const loadLikeDB = (id) => {
   return async function (dispatch) {
     try {
       const response = await instance.get(`/like/${id}`);
-      console.log(response)
+      // console.log(response)
       const data = response.data
       dispatch(loadLike({data, id}));
     } catch (error) {}
