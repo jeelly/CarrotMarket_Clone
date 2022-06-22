@@ -22,7 +22,6 @@ function App() {
       <Routerwrap>
         <Router />
       </Routerwrap>
-     
       <GlobalStyles />
       <Footer />
     </Container>

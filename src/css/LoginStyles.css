@@ -49,7 +49,7 @@ body {
 .login::after {
   left: 35%;
   bottom: -107%;
-  background-color: #ff8a3a;
+  background-color: #ff9954;
   -webkit-animation: wawes 7s infinite;
   -moz-animation: wawes 7s infinite;
   animation: wawes 7s infinite;
