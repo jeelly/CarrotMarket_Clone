@@ -35,6 +35,7 @@ const PostBtn = styled(Link)`
   color:#eee;
   line-height:40px;
   background-color:#fa6616;
+  transition: background-color 0.3s, transform 2s;
   &:hover {
     background-color:rgba(250, 102, 22,0.5);
   }
