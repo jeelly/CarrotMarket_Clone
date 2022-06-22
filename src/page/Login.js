@@ -79,12 +79,12 @@ const onChangeUsername = useCallback((e) => {
   
   return (
     <form className="login">
-      <h3>로그인</h3>
+      <LoginText>로그인</LoginText>
       <div>
         <IdBox>
-          <p>아이디</p>
+          <Label htmlFor="email">아이디</Label>
           <br />
-          <input
+          <Input
             type="email"
             placeholder="Username"
             ref={usernameRef}
@@ -101,9 +101,9 @@ const onChangeUsername = useCallback((e) => {
           </Pone>
         </IdBox>
         <PwdBox>
-          <p>비밀번호</p>
+          <Label htmlFor="password">비밀번호</Label>
           <br />
-          <input
+          <Input
             type="password"
             placeholder="Password"
             ref={passwordRef}
@@ -136,8 +136,23 @@ const onChangeUsername = useCallback((e) => {
 };
 
 // const Wrap = styled.div``;
-const IdBox = styled.div``;
-const PwdBox = styled.div``;
+const LoginText = styled.h1`
+margin-bottom:30px;
+`;
+const Label = styled.label`
+font-size:15px;
+`;
+const IdBox = styled.div`
+margin-bottom:15px;
+`;
+const PwdBox = styled.div`
+`;
+const Input = styled.input`
+  border-radius:5px;
+  border:1px solid #222;
+  height:20px;
+  margin-top:10px;
+`;
 const Button = styled.button`
   font-family: "Asap", sans-serif;
   cursor: pointer;
@@ -147,7 +162,7 @@ const Button = styled.button`
   width: 80px;
   border: 0;
   padding: 10px 0;
-  margin-top: 10px;
+  margin-top: 40px;
   margin-left: -5px;
   border-radius: 5px;
   /* background-color: #f45b69; */
