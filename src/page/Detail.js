@@ -23,25 +23,25 @@ const Detail = () => {
     const content = useSelector((state) => state.content.detail);
 
     const writer = localStorage.getItem("nickname")
-    console.log(writer)
-    console.log(content.user?.nickname)
+    const region = localStorage.getItem("region")
+
+
+    console.log(likes)
+    // console.log(content.user.nickname)
 
   useEffect (() => {
     setLoading(true);
-    dispatch(loadLikeDB(content.id));
-    dispatch(DetailContentDB(id));
+        dispatch(DetailContentDB(id));
   }, []);
-
+  useEffect (() => {
+    dispatch(loadLikeDB(content.id));
+    }, [content]);
 
   // 게시글 삭제 redux 함수 호출
   const onRemoveContent = async () => {
     await dispatch(removeContentDB(content.id));
     await navigate(-1)
   };
-
-  const togglebtn = async () => {
-    await dispatch(toggleLikeDB(content.id));
-  }
 
   //사진 슬라이드
   const settings = {
@@ -65,8 +65,8 @@ const Detail = () => {
             <UserWrap>
                 <UserImage>프로필사진</UserImage>
                 <UserInfo>
-                    <UserName>홍길동</UserName>
-                    <UserArea>서울</UserArea>
+                    <UserName>{content?.user?.nickname}</UserName>
+                    <UserArea>{content?.user?.region}</UserArea>
                 </UserInfo>
             </UserWrap>
             <BrLine/>
@@ -79,7 +79,7 @@ const Detail = () => {
                 ) : null}
                     
                 <ContentTitle>{content?.title}</ContentTitle>
-                <ContentOption>{content?.category} · <span> 2022-06-18</span></ContentOption>
+                <ContentOption>{content?.category} · <span>{content?.createdAt}</span></ContentOption>
                 <ContentPrice>{content?.price}원</ContentPrice>
                 <ContentText>{content?.content}
                 </ContentText>

@@ -16,6 +16,8 @@ const ContentList = (props) => {
   const pages = useSelector(state => state.content?.pages);
   const regions = localStorage.getItem("region")
 
+  console.log(contents)  
+
   //무한 스크롤
   const [target, setTarget] = useState(null);
 

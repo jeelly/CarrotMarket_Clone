@@ -17,6 +17,11 @@ useEffect(() => {
     }
   }, [likes]);
 
+  // console.log(activeLike)
+  // console.log(count)
+  // console.log(likes.id)
+  // console.log(content.id)
+
   const togglebtn = async () => {
     await dispatch(toggleLikeDB(content?.id));
     await dispatch(addCountDB({id:content?.id}))

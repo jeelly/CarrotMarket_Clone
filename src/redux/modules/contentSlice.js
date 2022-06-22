@@ -106,9 +106,15 @@ const userSlice = createSlice({
       state.list.push(action.payload);
     },
     addCount: (state, action) => {
-      state.list[action.payload.data.id].likeCount = action.payload.newlikeCount
-      state.toplist[action.payload.data.id].likeCount = action.payload.newlikeCount
-      state.detail.likeCount = action.payload.newlikeCount
+      if(state.list.find((content) => content.id === action.payload.data.id)) {
+        const newCount = state.list.find((content) => content.id === action.payload.data.id);
+        newCount.likeCount = action.payload.newlikeCount
+      }else if(state.toplist.find((content) => content.id === action.payload.data.id)) {
+        const newTopCount = state.toplist.find((content) => content.id === action.payload.data.id);
+        newTopCount.likeCount = action.payload.newlikeCount
+      }else {
+        state.detail.likeCount = action.payload.newlikeCount
+      }
     }
   },
 });
