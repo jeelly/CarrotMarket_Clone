@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=slice&color=gradient&height=200&section=header&text=Carrotmarket_Clone
+![header](https://capsule-render.vercel.app/api?type=slice&color=gradient&height=200&section=header&text=CarrotmarketClone
 &fontSize=90&animation=fadeIn&fontAlignY=38&desc=%20&descAlignY=62&descAlign=62)
 
 <br>
