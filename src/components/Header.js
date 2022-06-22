@@ -23,6 +23,7 @@ const Header = () => {
 
         // 로그아웃 시 페이지 리렌더링
         navigate('/')
+        window.location.reload()
     };
 
     // 로그인 상태 --> 로컬스토리지의 토큰 유무로 확인 (null or 토큰값)
@@ -40,7 +41,7 @@ const Header = () => {
     return (
         <Container>
             <PcWrap>
-                    <NavAtag href="/"><LogoImg></LogoImg><Title>당근마켓</Title></NavAtag>
+                    <NavLink to="/"><LogoImg></LogoImg><Title>당근마켓</Title></NavLink>
                 <RightWrap>
                 <Search type="text" placeholder='물품이나 동네를 검색해보세요.'/>
                 {!is_login && <HeaderLink to="/login">로그인</HeaderLink>}
@@ -178,7 +179,9 @@ const MobileBtn = styled.div`
     margin-right:1vw;
 `
 const NavLink = styled(Link)`
-    display:block;
+    display:flex;
+    flex-direction:row;
+    align-items: center;
     text-align:left;
     font-size:16px;
     margin-left:30px;

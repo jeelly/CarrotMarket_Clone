@@ -34,6 +34,7 @@ const Login = () => {
     // (함수전달 가능, 함수 전달 할 땐 괄호 없어야함.)
     dispatch(loginUserDB(users));
     navigate('/')
+    window.location.reload()
   };
 
 // username

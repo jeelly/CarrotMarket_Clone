@@ -137,6 +137,8 @@ const UserImage = styled.div`
     height:50px;
     border-radius:50%;
     border:1px solid #878686;
+    background-image:url("https://i.pinimg.com/736x/83/8b/64/838b64ad04f8545f9259b4670f045de3.jpg");
+    background-size:50px;
     text-indent:-9999px;
 `
 const UserInfo = styled.div`
