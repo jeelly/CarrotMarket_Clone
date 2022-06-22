@@ -47,9 +47,10 @@ export const removeContentDB = (targetId) => {
 
 // 게시글 추가하기
 export const addContentDB = (data) => {
+  console.log(data,"dfsdf")
   return async function (dispatch) {
-    try {
-      await instance.post("/content/", data);
+    try { 
+      await instance.post("/post/", data);
       // console.log(response.data, data)
       //서버에서 보내주는 데이터 넣기 
     } catch (error) {

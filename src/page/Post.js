@@ -67,14 +67,14 @@ const Post = () => {
   const addContentList = () => {
     // postSubmit();
 
-    let list = {
+    let data = {
       imageUrl: imageUrls,
       title: titleRef.current.value,
-      price: priceRef.current.value,
+      price: parseInt(priceRef.current.value),
       content: contentRef.current.value,
       category: categoryRef.current.value,
     };
-    dispath(addContentDB(list));
+    dispath(addContentDB(data));
     navigate('/top')
   };
 
@@ -96,6 +96,20 @@ const Post = () => {
   //   // });
   //   });
   // }
+
+  const [num, setNum] = React.useState();
+
+  const inputPriceFormat = (str) => {
+    const comma = (str) => {
+      str = String(str);
+      return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+    };
+    const uncomma = (str) => {
+      str = String(str);
+      return str.replace(/[^\d]+/g, "");
+    };
+    return comma(uncomma(str));
+  };
 
   const settings = {
     dots: true,
@@ -144,7 +158,12 @@ const Post = () => {
         <input type="text" ref={titleRef} />
         <br />
         <p>가격</p>
-        <input type="text" ref={priceRef} />
+        <Put
+            type="text"
+            value={num}
+            ref={priceRef} 
+            onChange={(e) => setNum(inputPriceFormat(e.target.value))}
+          />
         <br />
         <p>카테고리 선택</p>
         <select name="areaSelect" ref={categoryRef}>
@@ -182,4 +201,13 @@ const ImgWrap = styled.div`
   overflow: hidden;
   background-color: black;
 `;
+const Put = styled.input`
+  background-color: #fff;
+  border: 1.5px solid #000;
+  border-radius: 8px;
+  width: 400px;
+  height: 30px;
+  color: #000;
+`;
+
 export default Post;
