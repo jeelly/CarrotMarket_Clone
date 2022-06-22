@@ -129,10 +129,10 @@ const onChangeRePwd = useCallback(
   return (
     <div className="Signup">
     <Wrap>
-      <SignupText>회원가입</SignupText>
+      <SignupText>SIGN UP</SignupText>
       <div>
         <IdBox>
-        <Label htmlFor="email">아이디</Label>
+        <Label htmlFor="email">ID</Label>
           <br />
           <Input
             type="email"
@@ -150,7 +150,7 @@ const onChangeRePwd = useCallback(
           </Pone>
         </IdBox>
         <NicknameBox>
-        <Label htmlFor="nickname">닉네임</Label>
+        <Label htmlFor="nickname">NICKNAME</Label>
           <br />
           <Input
             id="nickname"
@@ -168,7 +168,7 @@ const onChangeRePwd = useCallback(
           </Pone>
         </NicknameBox>
         <PwdBox>
-        <Label htmlFor="password">비밀번호</Label>
+        <Label htmlFor="password">PASSWORD</Label>
           <br />
           <Input
           id="password"
@@ -186,7 +186,7 @@ const onChangeRePwd = useCallback(
           </Pone>
         </PwdBox>
         <PwdCkBox>
-        <Label htmlFor="repwd">비밀번호 확인</Label>
+        <Label htmlFor="repwd">PASSWORD CHECK</Label>
           <br />
           <Input
           id="repwd"
@@ -205,7 +205,7 @@ const onChangeRePwd = useCallback(
           </Pone>
         </PwdCkBox>
         <RegionBox>
-        <Label htmlFor="region">지역 선택</Label>
+        <Label htmlFor="region">REGION</Label>
               <br/>
           <Select name="areaSelect" ref={selectRef}>
             <option value="서울">서울</option>
@@ -234,7 +234,7 @@ const onChangeRePwd = useCallback(
           !isRePwd
         }  
       >
-        회원가입
+        JOIN
       </SignUpBtn>
     </Wrap>
     </div>
@@ -248,6 +248,7 @@ margin-bottom:30px;
 
 const Label = styled.label`
 font-size:15px;
+font-weight:700;
 `;
 const IdBox = styled.div`
 margin-bottom:15px;
@@ -264,6 +265,14 @@ margin-bottom:15px;
 const Pone = styled.p`
   color: #444;
   font-size: 13px;
+  font-weight: 5;
+  font-weight:700;
+  .message.error { 
+    color: #f70017; 
+    }
+  .message.success{
+    color: #1d901d;
+  }
 `;
 const Input = styled.input`
   border-radius:5px;
@@ -280,6 +289,7 @@ margin-top:7px;
 margin-bottom:30px;
 `;
 const SignUpBtn = styled.button`
+font-weight:700;
   font-family: "Asap", sans-serif;
   cursor: pointer;
   color: #fff;

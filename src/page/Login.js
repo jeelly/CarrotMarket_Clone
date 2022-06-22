@@ -78,11 +78,13 @@ const onChangeUsername = useCallback((e) => {
   };
   
   return (
-    <form className="login">
-      <LoginText>로그인</LoginText>
+    <div className="login" style={{
+      marginTop:"300px"
+    }}>
+      <LoginText>Login</LoginText>
       <div>
         <IdBox>
-          <Label htmlFor="email">아이디</Label>
+          <Label htmlFor="email">ID</Label>
           <br />
           <Input
             type="email"
@@ -101,7 +103,7 @@ const onChangeUsername = useCallback((e) => {
           </Pone>
         </IdBox>
         <PwdBox>
-          <Label htmlFor="password">비밀번호</Label>
+          <Label htmlFor="password">PASSWORD</Label>
           <br />
           <Input
             type="password"
@@ -129,9 +131,9 @@ const onChangeUsername = useCallback((e) => {
         // 버튼 비활성화
         disabled={!(isUsername && isPassword && username && password)}
       >
-        로그인
+        Sign In
       </Button>
-    </form>
+    </div>
   );
 };
 
@@ -141,6 +143,7 @@ margin-bottom:30px;
 `;
 const Label = styled.label`
 font-size:15px;
+font-weight: 700;
 `;
 const IdBox = styled.div`
 margin-bottom:15px;
@@ -170,9 +173,17 @@ const Button = styled.button`
   -webkit-transition: background-color 300ms;
   -moz-transition: background-color 300ms;
   transition: background-color 300ms;
+  font-weight:700;
 `;
 const Pone = styled.p`
   color: #444;
+  font-weight:700;
   font-size: 13px;
+  .message.error { 
+    color: #f70017; 
+    }
+  .message.success{
+    color: #1d901d;
+  }
 `;
 export default Login;
