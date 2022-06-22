@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 //미들웨어
 //login
@@ -26,7 +27,8 @@ export const loginUserDB = ( users ) => {
       })
       .catch(function (error) {
         // 로그인 실패 시 에러메시지
-        window.alert(error.response.data.errorMessage);
+        window.alert(error.response.data.message);
+        window.location.replace('/login')
       });
   };
 };

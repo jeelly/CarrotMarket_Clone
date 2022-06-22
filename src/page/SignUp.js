@@ -34,6 +34,7 @@ const SignUp = () => {
   const [rePwdMsg, setRePwdMsg] = useState("");
 
   const onSubmit = async () => {
+
     let users = {
       username: username,
       nickname: nickname,
@@ -48,7 +49,8 @@ const SignUp = () => {
         navigate("/login");
       })
       .catch((error) => {
-        window.alert(error.response.data.errormessage);
+        console.log(error)
+        window.alert(error.response.data.message);
       });
     }
     
@@ -125,7 +127,7 @@ const onChangeRePwd = useCallback(
   };
 
   return (
-    <form className="Signup">
+    <div className="Signup">
     <Wrap>
       <h1>회원가입</h1>
       <div>
@@ -235,7 +237,7 @@ const onChangeRePwd = useCallback(
         회원가입
       </SignUpBtn>
     </Wrap>
-    </form>
+    </div>
   );
 };
 
