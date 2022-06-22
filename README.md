@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+![header](https://capsule-render.vercel.app/api?type=slice&color=gradient&height=200&section=header&text=항대숲&fontSize=90&animation=fadeIn&fontAlignY=38&desc=%20&descAlignY=62&descAlign=62)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+## 프로젝트명: 당근마켓 클론 
 
-In the project directory, you can run:
+<br>
 
-### `yarn start`
+#### 지난주 미니 프로젝트의 복습 느낌으로 진행하였습니다. <br><br>✨
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `yarn test`
+# ✏️ 당근마켓 클론코딩 - 9조 클론프로젝트
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 제작기간
+### 2022년 6월 16일 ~ 2022년 6월 23일
 
-### `yarn build`
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##  🖥️ 항대숲 Page View
+<!-- ![0](https://user-images.githubusercontent.com/68406448/174055364-55559744-d42d-4f2a-ad87-3578f0f35834.gif) -->
+<!-- ![1](https://user-images.githubusercontent.com/68406448/174055376-7d8ceb1f-ecf0-4ba2-bfe9-ba009d269a10.gif) -->
+<!-- ![2](https://user-images.githubusercontent.com/68406448/174055494-4de0e0f9-a9a6-447c-b89a-848b95bb77a4.gif) -->
+<!-- ![3](https://user-images.githubusercontent.com/68406448/174055506-db0340eb-f679-41bf-9898-19f42e03a8d0.gif) -->
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🥇 Developers
 
-### `yarn eject`
+- **Front-end**
+  - 팀원: 김영호(인기글 조회, 전체글 조회, 지역글 조회, 게시물 삭제, 좋아요) / 팀원: 지송이(회원가입, 로그인, 게시글 작성 페이지)
+  - 추가 기능: 
+    - 무한스크롤 기능
+    - 사진 업로드 기능(다중 선택, 슬라이드)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<br>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Back-end** :  [https://github.com/whitewise95/clone_coding_project_9_teams](https://github.com/whitewise95/clone_coding_project_9_teams)
+  - 백현명 / 김건 / 심규홍
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🚀 Tech Stack
 
-## Learn More
+- **Front-end Tech Stack**
+  - React
+  - Redux
+  - Axios
+   
+- **Front-end Library**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| 라이브러리명            | 내용                                    | 참고 |
+| :-------------------- | :-------------------------------------- | :--- |
+| styled-components     | 스타일관리                               |      |
+| axios                 | 서버통신                                |      |
+| react-router-dom      | 렌더링                                  |      |
+| react-redux           |  상태관리                               |      |
+| @reduxjs/toolkit      |  Redux를 더 쉽게 사용                   |      |
+| react-slick           |  슬라이드                               |      |
+| moment                |  시간이 포함된 데이터                    |      |
+| intersection-observer |   옵저버                                |      |
+| fortawesome           |    아이콘 툴킷                          |      |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br>
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 💬 Front-end
+> 이번 프로젝트는 주특기 주차를 마치고 처음으로 프론트엔드와 백엔드로 나눠서 진행한 프로젝트 입니다.
+> 이번 프로젝트는 다음 주 실전 프로젝트 시작전에 배운 걸 정리하고자 진행한 프로젝트입니다.
+> CRUD기능의 구현에 집중하였고, 좋아요, 무한스크롤등 추가 기능도 구현 하였습니다.
+> 기능 구현을 끝낸 후 타당한 이유가 있는 새로운 기술스택 및 디자인패턴을 도입하려 노력했습니다.
+> 
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=footer)
