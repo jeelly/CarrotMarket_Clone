@@ -22,7 +22,7 @@ const Post = () => {
   const categoryRef = useRef(null);
 
   const [imageUrls, setImageUrls] = useState([]);
-  const [showImages, setShowImages] = useState([])
+  const [showImages, setShowImages] = useState([]);
 
   //이미지 1장 미리보기 --> e!!!!
   // const selectFile = (e) => {
@@ -34,12 +34,12 @@ const Post = () => {
   //   //   // imageList[0] = reader.result
   //   //   setShowImages([...showImages, e.target.result])
   //   // };
-    
+
   // };
 
   useEffect(() => {
     console.log(imageUrls);
-  }, [imageUrls])
+  }, [imageUrls]);
   // 이미지 선택했을 때 input type="file" => onChange 이벤트가 발생했을 때
   // 이미지 1장 업로드
   const imageUpload = (e) => {
@@ -56,11 +56,11 @@ const Post = () => {
 
     // axios.post("http://localhost:8090/image",formData)
     axios
-    .post("http://whitewise.shop/image", formData, config)
-    .then((response) => {
-      const url = response.data; // 이미지 주소 넣기
-      setImageUrls((current) => [...current, { imageUrl: url }]);
-    });
+      .post("http://whitewise.shop/image", formData, config)
+      .then((response) => {
+        const url = response.data; // 이미지 주소 넣기
+        setImageUrls((current) => [...current, { imageUrl: url }]);
+      });
   };
 
   // 등록하기
@@ -79,7 +79,7 @@ const Post = () => {
       category: categoryRef.current.value,
     };
     dispath(addContentDB(data));
-    window.location.replace("/content/region")
+    window.location.replace("/content/");
   };
 
   // const postSubmit = () => {
@@ -101,8 +101,7 @@ const Post = () => {
   //   });
   // }
 
-
-//콤마 찍기
+  //콤마 찍기
   const [num, setNum] = React.useState();
 
   const inputPriceFormat = (str) => {
@@ -122,35 +121,40 @@ const Post = () => {
   // const commaRemovePrice = num?.replace(/,/g, "");
   // let numberPrice = parseInt(commaRemovePrice);
 
-
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-    slidesToScroll: 1
-  }
+    slidesToScroll: 1,
+  };
 
   return (
     <Container>
       <TitleText>게시글 작성</TitleText>
-      <Buttons>
-        <AddBtn onClick={addContentList}>등록</AddBtn>
-        <CancelBtn
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          취소
-        </CancelBtn>
-      </Buttons>
-      <div style={{ width: "500px", height: "500px", overflow: "hidden"}}>
+      <ImgWrap>
         <Slider {...settings}>
           {imageUrls.map((image, index) => {
-            return <div key={index}><img style={{width: "400px", height: "400px", objectFit: "cover"}} src={image.imageUrl} alt="test"/></div>
+            return (
+              <div key={index}>
+                <img
+                  style={{
+                    width: "400px",
+                    height: "400px",
+                    objectFit: "cover",
+                  }}
+                  src={image.imageUrl}
+                  alt="test"
+                />
+              </div>
+            );
           })}
         </Slider>
-      </div>
+        {/* <img
+          src="https://shop.hshanwoo.co.kr/file_data/image/noimage.jpg"
+          alt="이미지 업로드 전 사진"
+        /> */}
+      </ImgWrap>
       {/* <CardSlide id="previewImage" image={showImages}>
         
         </CardSlide> */}
@@ -159,78 +163,162 @@ const Post = () => {
           return <div key={index}><img src={image.imageUrl} alt="test"/></div>
         })}
       </ImgWrap> */}
-      <div>
-        <form className="upload_input">
-          <input type="file" id="image" ref={imageRef} onChange={imageUpload} />
-          
-        </form>
-        <br />
-        <p>글 제목</p>
-        <input type="text" ref={titleRef} />
-        <br />
-        <p>가격</p>
-        <Put
-            type="text"
-            value={num}
-            ref={priceRef} 
-            onChange={(e) => setNum(inputPriceFormat(e.target.value))}
+      <ContentBox>
+        <div className="upload_input">
+          <input
+            type="file"
+            id="image"
+            ref={imageRef}
+            onChange={imageUpload}
           />
+        </div>
         <br />
-        <p>카테고리 선택</p>
-        <select name="areaSelect" ref={categoryRef}>
-          <option value="디지털">디지털 기기</option>
-          <option value="스포츠">스포츠/레저</option>
-          <option value="의류">의류</option>
-          <option value="뷰티">뷰티/미용</option>
-          <option value="기타">기타</option>
-        </select>
-        <br />
-        <input
-          type="text"
-          placeholder="올릴 게시글 내용을 작성해주세요."
-          ref={contentRef}
-        />
-      </div>
+        <div
+          style={{
+            textAlign: "left",
+          }}
+        >
+          <WriteBox>
+            <ContentTitleText>글 제목</ContentTitleText>
+            <Put type="text" ref={titleRef} />
+          </WriteBox>
+          <WriteBox>
+            {/* <ContentTitleText>카테고리 선택</ContentTitleText> */}
+            <Select name="areaSelect" ref={categoryRef}>
+              <option value="default">카테고리를 선택하세요</option>
+              <option value="디지털">디지털 기기</option>
+              <option value="스포츠">스포츠/레저</option>
+              <option value="의류">의류</option>
+              <option value="뷰티">뷰티/미용</option>
+              <option value="기타">기타</option>
+            </Select>
+          </WriteBox>
+          <WriteBox>
+            <ContentTitleText>가격</ContentTitleText>
+            <Put
+              type="text"
+              value={num}
+              ref={priceRef}
+              onChange={(e) => setNum(inputPriceFormat(e.target.value))}
+            />
+          </WriteBox>
+
+          <input
+            type="text"
+            placeholder="올릴 게시글 내용을 작성해주세요."
+            ref={contentRef}
+            style={{
+              width: "390px",
+              height: "150px",
+            }}
+          />
+        </div>
+      </ContentBox>
+      <Buttons>
+        <Btn onClick={addContentList}>등록</Btn>
+        <Btn
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          취소
+        </Btn>
+      </Buttons>
     </Container>
   );
 };
-const TitleText = styled.h1`
 
-`
-const Buttons = styled.div`
-display:flex;
-justify-content:row;
-`
-const AddBtn = styled.button`
-
-`
-const CancelBtn = styled.button`
-
-`
 const Container = styled.div`
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   margin: 80px auto;
+  @media screen and (max-width: 1200px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 1200px) {
+    width: 90%;
+  }
 `;
+
+const FileInput = styled.input`
+  border-radius: 2px;
+  border:none;
+  cursor:pointer;
+`;
+const ContentBox = styled.div`
+  margin-left: 90px;
+  width: 80%;
+`;
+const WriteBox = styled.div`
+  margin-bottom: 20px;
+`;
+const TitleText = styled.h1`
+  margin: 0 auto 30px auto;
+`;
+const Buttons = styled.div`
+  display: flex;
+  justify-content: row;
+  margin: 30px auto 0 auto;
+  gap: 1rem;
+`;
+const ContentTitleText = styled.p`
+  text-align: left;
+`;
+const Select = styled.select`
+  margin-right: 500px;
+  border:none;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  width: 395px;
+  height: 22px;
+  line-height: 22px;
+  cursor:pointer;
+  &:hover{
+    background-color:999;
+  }
+`;
+const Btn = styled.button`
+  border: none;
+  border-radius:5px;
+  margin-top: 6px;
+  background-color: #f0f0f0;
+  padding:5px 20px;
+  text-align: left;
+  cursor: pointer;
+`;
+
+// const ImgWrap = styled.div`
+//   width: 100%;
+//   height: 500px;
+//   border: 1px solid black;
+//   border-radius: 16px;
+//   margin-bottom: 30px;
+//   overflow: hidden;
+//   background-color: black;
+// `;
+
 const ImgWrap = styled.div`
-  width: 100%;
-  height: 500px;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  margin-bottom: 30px;
   border: 1px solid black;
   border-radius: 16px;
-  margin-bottom: 30px;
-  overflow: hidden;
-  background-color: black;
+  /* overflow:hidden; */
 `;
 const Put = styled.input`
-  background-color: #fff;
-  border: 1.5px solid #000;
-  border-radius: 8px;
-  width: 400px;
-  height: 30px;
-  color: #000;
+  width: 80%;
+  height: 25px;
+  line-height: 25px;
+  margin-bottom: 20px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid;
+  padding-bottom: 5px;
+  margin-right: 100px;
 `;
 
 export default Post;
