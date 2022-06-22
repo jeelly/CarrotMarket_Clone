@@ -129,12 +129,12 @@ const onChangeRePwd = useCallback(
   return (
     <div className="Signup">
     <Wrap>
-      <h1>회원가입</h1>
+      <SignupText>회원가입</SignupText>
       <div>
         <IdBox>
-        <label htmlFor="email">아이디</label>
+        <Label htmlFor="email">아이디</Label>
           <br />
-          <input
+          <Input
             type="email"
             id="email"
             ref={usernameRef}
@@ -150,9 +150,9 @@ const onChangeRePwd = useCallback(
           </Pone>
         </IdBox>
         <NicknameBox>
-        <label htmlFor="nickname">닉네임</label>
+        <Label htmlFor="nickname">닉네임</Label>
           <br />
-          <input
+          <Input
             id="nickname"
             type="nickname"
             ref={nicknameRef}
@@ -168,9 +168,9 @@ const onChangeRePwd = useCallback(
           </Pone>
         </NicknameBox>
         <PwdBox>
-        <label htmlFor="password">비밀번호</label>
+        <Label htmlFor="password">비밀번호</Label>
           <br />
-          <input
+          <Input
           id="password"
             type="password"
             ref={pwdRef}
@@ -186,9 +186,9 @@ const onChangeRePwd = useCallback(
           </Pone>
         </PwdBox>
         <PwdCkBox>
-        <label htmlFor="repwd">비밀번호 확인</label>
+        <Label htmlFor="repwd">비밀번호 확인</Label>
           <br />
-          <input
+          <Input
           id="repwd"
             type="password"
             ref={rePwdRef}
@@ -205,20 +205,20 @@ const onChangeRePwd = useCallback(
           </Pone>
         </PwdCkBox>
         <RegionBox>
-        <label htmlFor="region">지역 선택</label>
+        <Label htmlFor="region">지역 선택</Label>
               <br/>
-          <select name="areaSelect" ref={selectRef}>
-            <option value="seoul">서울</option>
-            <option value="gyeonggi-do">경기</option>
-            <option value="gangwon-do">강원</option>
-            <option value="chungcheongbug-do">충북</option>
-            <option value="chungcheongnam-do">충남</option>
-            <option value="gyeongsangbug-do">경북</option>
-            <option value="gyeongsangnam-do">경남</option>
-            <option value="jeonlabug-do">전북</option>
-            <option value="jeonlanam-do">전남</option>
-            <option value="jeju-do">제주</option>
-          </select>
+          <Select name="areaSelect" ref={selectRef}>
+            <option value="서울">서울</option>
+            <option value="경기">경기</option>
+            <option value="강원">강원</option>
+            <option value="충북">충북</option>
+            <option value="충남">충남</option>
+            <option value="경북">경북</option>
+            <option value="경남">경남</option>
+            <option value="전북">전북</option>
+            <option value="전남">전남</option>
+            <option value="제주">제주</option>
+          </Select>
         </RegionBox>
       </div>
       <SignUpBtn
@@ -242,12 +242,42 @@ const onChangeRePwd = useCallback(
 };
 
 const Wrap = styled.div``;
-const IdBox = styled.div``;
-const NicknameBox = styled.div``;
-const PwdBox = styled.div``;
+const SignupText = styled.h1`
+margin-bottom:30px;
+`;
+
+const Label = styled.label`
+font-size:15px;
+`;
+const IdBox = styled.div`
+margin-bottom:15px;
+`;
+const NicknameBox = styled.div`
+margin-bottom:15px;
+`;
+const PwdBox = styled.div`
+margin-bottom:15px;
+`;
+const PwdCkBox = styled.div`
+margin-bottom:15px;
+`;
 const Pone = styled.p`
   color: #444;
   font-size: 13px;
+`;
+const Input = styled.input`
+  border-radius:5px;
+  border:1px solid #222;
+  height:20px;
+  margin-top:10px;
+`;
+const Select = styled.select`
+border-radius:3px;
+width:52px;
+height:22px;
+font-size:13px;
+margin-top:7px;
+margin-bottom:30px;
 `;
 const SignUpBtn = styled.button`
   font-family: "Asap", sans-serif;
@@ -267,7 +297,7 @@ const SignUpBtn = styled.button`
   -moz-transition: background-color 300ms;
   transition: background-color 300ms;
 `;
-const PwdCkBox = styled.div``;
+
 const RegionBox = styled.div``;
 
 export default SignUp;

@@ -16,7 +16,7 @@ body {
   margin-top: 32vh;
   margin-left: 105vh;
   width: 60%;
-  height: 45vh;
+  height: 53vh;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -40,7 +40,7 @@ body {
 }
 .login::before {
   left: 40%;
-  bottom: -130%;
+  bottom: -100%;
   background-color: #4ff735;;
   -webkit-animation: wawes 6s infinite linear;
   -moz-animation: wawes 6s infinite linear;
@@ -48,7 +48,7 @@ body {
 }
 .login::after {
   left: 35%;
-  bottom: -125%;
+  bottom: -107%;
   background-color: #ff8a3a;
   -webkit-animation: wawes 7s infinite;
   -moz-animation: wawes 7s infinite;

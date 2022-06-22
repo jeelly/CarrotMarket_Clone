@@ -16,7 +16,7 @@ body {
   margin-top: 45vh;
   margin-left: 105vh;
   width: 60%;
-  height: 65vh;
+  height: 86vh;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -25,7 +25,7 @@ body {
   -webkit-transition: -webkit-transform 300ms, box-shadow 300ms;
   -moz-transition: -moz-transform 300ms, box-shadow 300ms;
   transition: transform 300ms, box-shadow 300ms;
-  box-shadow: 5px 10px 10px rgba(169, 112, 26, 0.2);
+  box-shadow: 5px 10px 10px rgba(239, 155, 72, 0.34);
 }
 .Signup::before, .Signup::after {
   content: "";
@@ -40,7 +40,7 @@ body {
 }
 .Signup::before {
   left: 40%;
-  bottom: -63%;
+  bottom: -31%;
   background-color: #4ff735;;
   -webkit-animation: wawes 6s infinite linear;
   -moz-animation: wawes 6s infinite linear;
@@ -48,7 +48,7 @@ body {
 }
 .Signup::after {
   left: 35%;
-  bottom: -70%;
+  bottom: -38%;
   background-color: #ff8a3a;
   -webkit-animation: wawes 7s infinite;
   -moz-animation: wawes 7s infinite;
