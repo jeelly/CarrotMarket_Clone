@@ -23,7 +23,7 @@ const Header = () => {
     return (
         <Container>
             <PcWrap>
-                <NavAtag href="/"><LogoImg></LogoImg><Title>당근마켓</Title></NavAtag>
+                <NavLink to="/"><LogoImg></LogoImg><Title>당근마켓</Title></NavLink>
                 <RightWrap>
                 <Search type="text" placeholder='물품이나 동네를 검색해보세요.'/>
                 {!user && <HeaderLink to="/login">로그인</HeaderLink>}
@@ -32,16 +32,16 @@ const Header = () => {
                 </RightWrap>
             </PcWrap>
             <MobileWrap>
-                <NavAtag href="/"><LogoImg></LogoImg><Title>당근마켓</Title></NavAtag>
+                <NavLink to="/"><LogoImg></LogoImg><Title>당근마켓</Title></NavLink>
                 <NavBtn onClick={() => {setIsToggled(!isToggled);}}></NavBtn>
                 <NavManu isToggled={isToggled}>
                     <MobileBtn onClick={() => {setIsToggled(!isToggled);}}></MobileBtn>
                     <BrDiv></BrDiv>
-                    <li><NavAtag href="/content/top">지역 인기매물 보러 가기</NavAtag></li>
-                    <li><NavAtag href="/content/region">지역매물 보러 가기</NavAtag></li>
+                    <li><NavLink to="/content/top">지역 인기매물 보러 가기</NavLink></li>
+                    <li><NavLink to="/content/region">지역매물 보러 가기</NavLink></li>
                     <BrDiv></BrDiv>
-                    <li>{!user && <NavAtag href="/login">로그인</NavAtag>}</li>
-                    <li>{!user && <NavAtag href="/SignUp">회원가입</NavAtag>}</li>
+                    <li>{!user && <NavLink to="/login">로그인</NavLink>}</li>
+                    <li>{!user && <NavLink to="/SignUp">회원가입</NavLink>}</li>
                     <li>{user && <NavAtag href="/" onClick={deleteToken}>로그아웃</NavAtag>}</li>
                 </NavManu>
             </MobileWrap>

@@ -122,8 +122,9 @@ const onChangeUsername = useCallback((e) => {
         </PwdBox>
       </div>
       <Button
-        onClick={() => {
-          login();
+        onClick={async () => {
+          await login();
+          await window.location.reload();
         }}
         // 버튼 비활성화
         disabled={!(isUsername && isPassword && username && password)}

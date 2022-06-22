@@ -35,6 +35,7 @@ export const DetailContentDB = (id) => {
 
 // 게시글 삭제
 export const removeContentDB = (targetId) => {
+  console.log(targetId)
   return async function (dispatch) {
     try {
       await instance.delete(`/post/${targetId}`);
@@ -47,10 +48,9 @@ export const removeContentDB = (targetId) => {
 
 // 게시글 추가하기
 export const addContentDB = (data) => {
-  console.log(data,"dfsdf")
   return async function (dispatch) {
-    try { 
-      await instance.post("/post/", data);
+    try {
+      await instance.post("/content/", data);
       // console.log(response.data, data)
       //서버에서 보내주는 데이터 넣기 
     } catch (error) {
@@ -84,6 +84,7 @@ const userSlice = createSlice({
   },
   reducers: {
     loadContent: (state, action) => {
+      console.log(action.payload)
       state.list = [...action.payload.newstate];
       state.pages = action.payload.pages;
     },
@@ -96,11 +97,14 @@ const userSlice = createSlice({
       state.detail = action.payload
     },
     removeContent(state, action) {
-      const del = state.list.find((content) => content.id === action.payload);
-      if (del) {
-        state.list = state.list.filter(
-          (content) => content.id !== action.payload
+      const list_del = state.list.find((content) => content.id === action.payload);
+      const toplist_del = state.toplist.find((content) => content.id === action.payload);
+      if (list_del) {
+        state.list = state.list.filter((content) => content.id !== action.payload
         );
+      } 
+      if (toplist_del) {
+        state.toplist = state.toplist.filter((content) => content.id !== action.payload)
       }
     },
     addContent: (state, action) => {
