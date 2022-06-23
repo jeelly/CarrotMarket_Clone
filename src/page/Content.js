@@ -10,7 +10,8 @@ import ContentTopList from '../components/content/ContentTopList';
 const ListItem = () => {
     const { id } = useParams();
     const region = localStorage.getItem("region")
-
+    const is_login = localStorage.getItem("token")
+    
     console.log("지역", region)
     return (
       <Container>
@@ -19,6 +20,7 @@ const ListItem = () => {
             <ContentTopList region={region} mainPage={true}/> :
             <ContentList  region={region} mainPage={true}/>
         }
+        {is_login && <PostBtn to="/post">+</PostBtn>}
       </Container>
     );
 };
@@ -43,4 +45,20 @@ const AreaSelect = styled.select`
     height:34px;
     font-size:20px;
     float:right;
+`
+const PostBtn = styled(Link)`
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  position:fixed;
+  bottom:5vh;
+  right:2vw;
+  font-size:50px;
+  color:#eee;
+  line-height:40px;
+  background-color:#fa6616;
+  transition: background-color 0.3s, transform 2s;
+  &:hover {
+    background-color:rgba(250, 102, 22,0.5);
+  }
 `
