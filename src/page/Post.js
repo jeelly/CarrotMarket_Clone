@@ -99,7 +99,7 @@ const Post = () => {
     }else {
       dispath(addContentDB(data));
     }
-    // window.location.replace("/content/");
+    window.location.replace("/content/");
   };
 
   //콤마 찍기
