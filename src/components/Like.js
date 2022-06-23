@@ -8,7 +8,7 @@ import { addCountDB } from "../redux/modules/contentSlice";
 const Like = ({ content, likes, detail }) => {
   const dispatch = useDispatch();
   const [activeLike, setActiveLike] = useState(true);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(content.likeCount);
 
   const [viewCount, setViewCount] = useState(0);
 

@@ -59,6 +59,23 @@ export const addContentDB = (data) => {
   };
 };
 
+// 게시글 수정
+//Update
+export const updateContentDB = (contents_obj, id) => {
+  return async function (dispatch) {
+    console.log('업데이트', contents_obj);
+    await instance
+      .patch(`/post/${id}`, contents_obj)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log('에러', error.response.data);
+      });
+    dispatch(updateContent(contents_obj, id));
+  };
+};
+
 //add count
 export const addCountDB = (data) => {
   return async function (dispatch) {
@@ -110,6 +127,14 @@ const userSlice = createSlice({
     addContent: (state, action) => {
       state.list.push(action.payload);
     },
+    updateContent: (state, action) => {
+      const newState = state.list.filter((l, idx) => {
+        return l.id !== action.payload.id;
+      });
+      console.log(action.payload)
+      const newwState = [...newState, action.payload];
+      state.list = newwState;
+    },
     addCount: (state, action) => {
       if(state.list.find((content) => content.id === action.payload.data.id)) {
         const newCount = state.list.find((content) => content.id === action.payload.data.id);
@@ -124,5 +149,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { loadContent, loadTopContent, DetailContent, removeContent, addContent, addCount} = userSlice.actions;
+export const { loadContent, loadTopContent, DetailContent, removeContent, addContent, updateContent, addCount} = userSlice.actions;
 export default userSlice.reducer;
