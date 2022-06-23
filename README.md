@@ -73,5 +73,7 @@
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=footer)
 
 ## 프로젝트 시연 사진
-1. 
+
+ 1. 메인 페이지
+ 
 ![image](https://user-images.githubusercontent.com/83892440/175311248-254627aa-8958-4dfd-9ae4-06b6bb77db03.png)
