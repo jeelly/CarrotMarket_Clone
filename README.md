@@ -82,7 +82,7 @@
 
 ![image](https://user-images.githubusercontent.com/83892440/175313688-33b767de-86bb-4a70-8ece-c8a892ce8762.png)
 
-2. 회원가입 페이지
+2. 회원가입 페이지(벨리데이션 미충족시 버튼 비활성화)
 
 ![image](https://user-images.githubusercontent.com/83892440/175311856-653c18a8-92b0-4414-a605-bcf28bfed65c.png)
 
