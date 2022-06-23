@@ -138,6 +138,7 @@ const onChangeRePwd = useCallback(
             type="email"
             id="email"
             ref={usernameRef}
+            placeholder="Username"
             onChange={onChangeUsername}
             required
           />
@@ -156,6 +157,7 @@ const onChangeRePwd = useCallback(
             id="nickname"
             type="nickname"
             ref={nicknameRef}
+            placeholder="Nickname"
             onChange={onChangeNickname}
             required
           />
@@ -174,6 +176,7 @@ const onChangeRePwd = useCallback(
           id="password"
             type="password"
             ref={pwdRef}
+            placeholder="Password"
             onChange={onChangePwd}
             required
           />
@@ -192,6 +195,7 @@ const onChangeRePwd = useCallback(
           id="repwd"
             type="password"
             ref={rePwdRef}
+            placeholder="Password Check"
             onChange={onChangeRePwd}
             onKeyPress={onKeyPress}
             required
