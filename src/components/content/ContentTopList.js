@@ -13,7 +13,16 @@ const ContentTopList = (props) => {
   const pages = useSelector((state) => state.content?.top_pages);
   const regions = localStorage.getItem("region")
 
-  console.log(pages)
+  //로그인해서 지역이 있을때 
+  const new_contents = []
+  if(regions) {
+    new_contents.push(...contents.filter((content) => regions === content.region))
+  } else {
+    new_contents.push(...contents)
+  }
+  console.log(new_contents)
+
+
   //무한 스크롤
   const [target, setTarget] = useState(null);
 
@@ -40,27 +49,17 @@ const ContentTopList = (props) => {
   }, [target]);
 
   
-
   return (
         <ArticleWrap>
             <Grid>
-            {regions
-                ? contents
-                    .filter((content) => regions === content.region)
-                    .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
-                    .map((content, idx) => (
-                        <div key={idx}>
-                        <ContentItem content={content}/>
-                        {props.mainPage ? (<div ref={idx === contents.length - 1 ? setTarget : null}></div>):null}
-                        </div>
-                    ))     
-                : contents
+              {new_contents
                 .filter((content,idx) => (!props.mainPage ? idx < 4 : true))
                 .map((content, idx) => (
-                    <div key={idx}>
+                        <div key={idx}>
                         <ContentItem content={content}/>
-                        {props.mainPage ? (<div ref={idx === contents.length - 1 ? setTarget : null}></div>):null}
-                    </div>
+                        {props.mainPage ? (<div ref={idx === new_contents.length - 1 ? setTarget : null}></div>)
+                        : (<div ref={new_contents.length -1 < 4? setTarget : null}></div>)}
+                        </div>
                 ))}
             </Grid>
         </ArticleWrap>

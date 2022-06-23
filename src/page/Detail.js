@@ -84,7 +84,7 @@ const Detail = () => {
                 <ContentText>{content?.content}
                 </ContentText>
                 <ContentInfo>채팅0 · 조회0</ContentInfo>
-                <LikeBtn>{loading && <Like content={content} likes={likes}/>}</LikeBtn>
+                <LikeBtn>{loading && <Like content={content} likes={likes} detail={true}/>}</LikeBtn>
                 <BrLine/>
             </ContentWrap>
             

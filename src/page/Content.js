@@ -10,13 +10,14 @@ import ContentTopList from '../components/content/ContentTopList';
 const ListItem = () => {
     const { id } = useParams();
     const region = localStorage.getItem("region")
-    
+
+    console.log("지역", region)
     return (
       <Container>
         <Title>{id==="top"?"중고 거래 인기매물":"중고 거래 지역매물"}</Title>
         {id==="top"? 
             <ContentTopList region={region} mainPage={true}/> :
-            <ContentList region={region} mainPage={true}/>
+            <ContentList  region={region} mainPage={true}/>
         }
       </Container>
     );

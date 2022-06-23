@@ -7,7 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 //styled
 import styled from "styled-components";
 import { userActions } from '../redux/modules/userSlice';
-
+import logo from '../img/carrotlogo.png'
+import ham from '../img/ham.png'
 const Header = () => {
     const user = useSelector((state)=>state.user.isLogin)
     const deleteToken = () => {
@@ -23,7 +24,7 @@ const Header = () => {
     return (
         <Container>
             <PcWrap>
-                <NavLink to="/"><LogoImg></LogoImg><Title>당근마켓</Title></NavLink>
+                <LogoLink to="/"><LogoImg logo={logo}></LogoImg><Title>당근마켓</Title></LogoLink>
                 <RightWrap>
                 <Search type="text" placeholder='물품이나 동네를 검색해보세요.'/>
                 {!user && <HeaderLink to="/login">로그인</HeaderLink>}
@@ -32,11 +33,11 @@ const Header = () => {
                 </RightWrap>
             </PcWrap>
             <MobileWrap>
-                <NavLink to="/"><LogoImg></LogoImg><Title>당근마켓</Title></NavLink>
-                <NavBtn onClick={() => {setIsToggled(!isToggled);}}></NavBtn>
+                <LogoLink to="/"><LogoImg logo={logo}></LogoImg><Title>당근마켓</Title></LogoLink>
+                <NavBtn ham={ham} onClick={() => {setIsToggled(!isToggled);}}></NavBtn>
                 <NavManu isToggled={isToggled}>
                     <MobileBtn onClick={() => {setIsToggled(!isToggled);}}></MobileBtn>
-                    <BrDiv></BrDiv>
+                    <BrDiv style={{marginTop:"50px"}}></BrDiv>
                     <li><NavLink to="/content/top">지역 인기매물 보러 가기</NavLink></li>
                     <li><NavLink to="/content/region">지역매물 보러 가기</NavLink></li>
                     <BrDiv></BrDiv>
@@ -66,7 +67,7 @@ const PcWrap = styled.div`
     padding:0 20vw;
     justify-content:space-between;
     align-items:center;
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 940px) {
         padding:0 1vw;
   }
     @media screen and (max-width: 600px) {
@@ -83,8 +84,7 @@ const LogoImg = styled.div`
     display:inline-block;
     width:16px;
     height:24px;
-    background-image:url("carrotlogo.png");
-    /* background-size:40px; */
+    background-image:url(${(props) => props.logo});
     background-size:16px;
     background-repeat:no-repeat;
     background-position:center;
@@ -119,7 +119,8 @@ const HeaderLink = styled(Link)`
 `
 const NavBtn = styled.div`
     text-indent:-9999px;
-    background-image:url("ham.png");
+    /* background-image:url("ham.png"); */
+    background-image:url(${(props) => props.ham});
     background-position:center;
     background-size:50px 50px;
     background-repeat:no-repeat;
@@ -142,18 +143,21 @@ const MobileWrap = styled.div`
   }
 `
 const NavManu = styled.ul`
-    display:${(props) => (props.isToggled ? "block":"none")};
+    /* display:${(props) => (props.isToggled ? "block":"none")}; */
     width:50%;
     height:100vh;
     background-color:white;
     position:absolute;
     top:0;
     right:0;
+    opacity:${(props) => (props.isToggled ? 1:0)};
+    transition: all ease 0.2s 0s;
 `
 const MobileBtn = styled.div`
-    background-image:url("ham.png");
+    background-image:url(${(props) => props.ham});
+    background-image:url("https://www.dmcreport.co.kr/static/images/ico_x_bk.png");
     background-position:center;
-    background-size:50px 50px;
+    background-size:30px 30px;
     background-repeat:no-repeat;
     width:50px;
     height:50px;
@@ -170,6 +174,14 @@ const NavLink = styled(Link)`
     margin-left:30px;
     margin-bottom:10px;
 `
+const LogoLink = styled(Link)`
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    text-align:left;
+    font-size:16px;
+    margin-left:1vw;
+`
 
 const NavAtag = styled.a`
     display:flex;
@@ -182,9 +194,8 @@ const NavAtag = styled.a`
 `
 const BrDiv = styled.p`
     display:inline-block;
-    width:80%;
-    text-align:center;
-    margin-left:130px;
+    width:100%;
+    text-align:left;
     height:1px;
     background-color:#dbdbdb;
     margin:20px 0 10px 0;
