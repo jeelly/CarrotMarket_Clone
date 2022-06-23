@@ -71,3 +71,7 @@
 > 기능 구현을 끝낸 후 타당한 이유가 있는 새로운 기술스택 및 디자인패턴을 도입하려 노력했습니다.
 > 
 ![Footer](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=footer)
+
+## 프로젝트 시연 사진
+1. 
+![image](https://user-images.githubusercontent.com/83892440/175311248-254627aa-8958-4dfd-9ae4-06b6bb77db03.png)
