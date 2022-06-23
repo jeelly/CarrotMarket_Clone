@@ -74,6 +74,40 @@
 
 ## 프로젝트 시연 사진
 
- 1. 메인 페이지
+ 1. 메인 페이지/로그인전
  
 ![image](https://user-images.githubusercontent.com/83892440/175311248-254627aa-8958-4dfd-9ae4-06b6bb77db03.png)
+
+1-1. 메인 페이지/로그인 후
+
+![image](https://user-images.githubusercontent.com/83892440/175313688-33b767de-86bb-4a70-8ece-c8a892ce8762.png)
+
+2. 회원가입 페이지
+
+![image](https://user-images.githubusercontent.com/83892440/175311856-653c18a8-92b0-4414-a605-bcf28bfed65c.png)
+
+3. 로그인 페이지
+
+![image](https://user-images.githubusercontent.com/83892440/175311982-cbeed6ca-5640-4562-875f-02ef3bbd2478.png)
+
+
+4. 게시물 전체 조회 페이지 (좋아요 순대로 정렬)
+
+![image](https://user-images.githubusercontent.com/83892440/175312134-c21fe104-bbd2-4f73-9497-0a669145eada.png)
+
+5. 게시물 상세 페이지/타유저 게시물
+
+![image](https://user-images.githubusercontent.com/83892440/175312265-9072d038-77eb-40f4-bbd1-1b1ff99b840d.png)
+
+5-1. 게시물 상세 페이지/ 본인 게시물(좋아요, 수정, 삭제 구현)
+
+![image](https://user-images.githubusercontent.com/83892440/175313128-b8d5738c-8f3b-4d4a-907c-5d8e637c2257.png)
+
+6. 게시물 작성 페이지(가격 천단위 콤마, 슬라이더 구현)
+
+![image](https://user-images.githubusercontent.com/83892440/175312796-3038c5e4-a577-4156-ba9a-8dc1cd03dd5d.png)
+
+7. 게시물 수정 페이지
+
+![image](https://user-images.githubusercontent.com/83892440/175313394-175ca7cb-504e-45a8-8189-27f38e2d152b.png)
+
