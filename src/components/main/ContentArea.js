@@ -15,10 +15,10 @@ const ContentArea = () => {
     <Container color="#e6e6e6">
       <SubTitle>중고거래 인기매물</SubTitle>
       <ContentTopList MainPage={true} />
-      <MoreLink to="content/top">지역 인기매물 더 보기</MoreLink>
-      <SubTitle>중고거래 지역매물</SubTitle>
+      <MoreLink to="content/top">{nickname ? "지역 인기매물 더 보기" : "전체 인기매물 더 보기" }</MoreLink>
+      <SubTitle>{nickname ? "중고거래 지역매물" : "중고거래 전체매물"}</SubTitle>
       <ContentList MainPage={true} />
-      <MoreLink to="content/region">지역매물 더 보기</MoreLink>
+      <MoreLink to="content/region">{nickname ? "지역매물 더 보기" : "전체매물 더 보기"}</MoreLink>
     </Container>
   );
 };
